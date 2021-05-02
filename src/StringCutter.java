@@ -1,18 +1,19 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class StringCutter {
 
     File nFile;
     Scanner inp;
-    public StringCutter(){
-        //nFile = new File(System.getProperty("user.dir") + "");
-        //inp = new Scanner(nFile);
+    public StringCutter(String file) throws FileNotFoundException {
+        nFile = new File(System.getProperty("user.dir")+"\\"+"maps"+"\\"+file);
+        inp = new Scanner(nFile);
 
-
+        System.out.println(System.getProperty("user.dir")+"\\"+"maps"+"\\"+file);
     }
 
-    public static void main(String[] args) {
-        System.out.println(System.getProperty("user.dir")+"\\");
+    public static void main(String[] args) throws FileNotFoundException {
+        new StringCutter("area2.txt");
     }
 }
