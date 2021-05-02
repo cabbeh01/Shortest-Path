@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,9 +8,21 @@ public class Area extends JPanel {
     //Creating random object
     Random r = new Random();
 
-    //Position for the "new" ball object
-    int x,y;
+    StringCutter SC;
 
+    //Points for the start and end-point
+    Point start;
+    Point End;
+
+    public Area(){
+        try {
+            SC = new StringCutter("area1.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
     //Variable to see if the game is paused
     public boolean paused = false;
 
@@ -52,7 +65,7 @@ public class Area extends JPanel {
             }
         }
     }
-
+*/
 
     //The paint component to draw the panel and calling the paint function on the balls
     @Override
@@ -69,15 +82,16 @@ public class Area extends JPanel {
         //Enabling antialias to get a smoother experience
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g2d.setColor(Color.RED);
+        g2d.setColor(Color.BLACK);
+        g2d.scale(0.5,0.5);
+        for(Polygon a : SC.polys){
+            g2d.fillPolygon(a.xarray,a.yarray,8);
+        }
 
-        int[] x = {442,599,599,442};
-        int[] y = {377,377,541,541};
 
-        g2d.fillPolygon(x,y,4);
         //g2d.fillP
 
         //Drawing the contour
-        g2d.fillOval(998,950,1,1);
+        //g2d.fillOval(998,950,1,1);
     }
 }
