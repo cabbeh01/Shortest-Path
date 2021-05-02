@@ -71,6 +71,12 @@ public class Area extends JPanel {
 
         g2d.setColor(Color.RED);
 
+        int[] x = {442,599,599,442};
+        int[] y = {377,377,541,541};
+
+        g2d.fillPolygon(x,y,4);
+        //g2d.fillP
+
         //Drawing the contour
         g2d.fillOval(998,950,1,1);
     }

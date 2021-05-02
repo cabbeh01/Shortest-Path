@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
-import java.sql.SQLOutput;
-import java.io.File;
 
 public class MapCreator {
 
