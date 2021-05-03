@@ -2,14 +2,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.*;
 
 public class StringCutter {
 
     File nFile;
     Scanner inp;
     public static int[] boundary = new int[4];
-    public ArrayList<Polygon> polys = new ArrayList<>();
+    public ArrayList<Polygon.Polygongfx> polys = new ArrayList<Polygon.Polygongfx>();
 
 
     public StringCutter(String file) throws FileNotFoundException {
@@ -93,8 +92,8 @@ public class StringCutter {
 
             //vi behöver skapa 4 edges för varje polygon, denna loopen ^ skapar en
             //Vi behöver skapa en array med polygoner som vi kan spara de i
-            Polygon polygon = new Polygon(topedge,rightedge,topedge,rightedge);
-            //polys.add(new Polygon(xPoints,yPoints,8));
+            Polygon.Polygonmath polygon = new Polygon.Polygonmath(topedge,rightedge,topedge,rightedge);
+            polys.add(new Polygon.Polygongfx(xPoints,yPoints,8));
 
         }
     }

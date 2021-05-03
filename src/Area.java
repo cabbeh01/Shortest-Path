@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Area extends JPanel {
@@ -84,8 +83,8 @@ public class Area extends JPanel {
 
         g2d.setColor(Color.BLACK);
         g2d.scale(0.5,0.5);
-        for(Polygon a : SC.polys){
-            //g2d.fillPolygon(a.xarray,a.yarray,8);
+        for(Polygon.Polygongfx a : SC.polys){
+            g2d.fillPolygon(a.xarray,a.yarray,8);
         }
 
 
