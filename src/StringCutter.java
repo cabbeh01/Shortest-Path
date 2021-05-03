@@ -31,18 +31,18 @@ public class StringCutter {
             System.out.println(a);
 
         }
-        System.out.println((int)Double.parseDouble(test[1]));
-        System.out.println((int)Double.parseDouble(test[2]));
-        System.out.println((int)Double.parseDouble(test[3]));
-        System.out.println((int)Double.parseDouble(test[4]));
+        //System.out.println((int)Double.parseDouble(test[1]));
+        //System.out.println((int)Double.parseDouble(test[2]));
+        //System.out.println((int)Double.parseDouble(test[3]));
+        //System.out.println((int)Double.parseDouble(test[4]));
 
         System.out.println(bound);
         for(int i= 1; i<=4;i++){
             boundary[i-1] = (int)Double.parseDouble(test[i]);
         }
 
-        System.out.println("("+boundary[0] +","+boundary[1]+")");
-        System.out.println("("+boundary[2] +","+boundary[3]+")");
+        //System.out.println("("+boundary[0] +","+boundary[1]+")");
+        //System.out.println("("+boundary[2] +","+boundary[3]+")");
 
         //Kvar att fixa är att göra om bindarys till en tvådim array. För tillfälligt ligger
         //Värdena i en array
@@ -56,7 +56,7 @@ public class StringCutter {
             inp.nextLine();
             inp.nextLine();
             int i = 0;
-            int lenght = 0;
+            int length = 0;
             int[] xPoints = new int[8];
             int[] yPoints = new int[8];
             while(i<4) {
@@ -68,11 +68,14 @@ public class StringCutter {
                 yPoints[i] =(int)Double.parseDouble(dat[1]);
                 xPoints[i+1] = (int)Double.parseDouble(dat[2]);
                 yPoints[i+1] = (int)Double.parseDouble(dat[3]);
-                lenght = (int)Double.parseDouble(dat[4]);
+                length = (int)Double.parseDouble(dat[4]);
+
+                StdDraw.line(xPoints[i],yPoints[i],xPoints[i+1],yPoints[i+1]);
                 i++;
             }
 
-            polys.add(new Polygon(xPoints,yPoints,8));
+            //polys.add(new Polygon(xPoints,yPoints,8));
+
         }
     }
 
