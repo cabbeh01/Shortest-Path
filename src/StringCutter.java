@@ -109,6 +109,11 @@ public class StringCutter {
                 StdDraw.circle(790,300,2);
 
             }
+            if(polygon.isInPoly(new Point(810,300))){
+                StdDraw.setPenColor(Color.blue);
+                StdDraw.circle(810,300,2);
+
+            }
             StdDraw.setPenRadius(rad);
             StdDraw.setPenColor(Color.BLACK);
 
