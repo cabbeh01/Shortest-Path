@@ -64,6 +64,8 @@ public class StringCutter {
             Edge tempEdge;
             Edge topedge = new Edge(temppoint,temppoint);
             Edge rightedge = new Edge(temppoint,temppoint);
+            Edge bottomedge = new Edge(temppoint,temppoint);
+            Edge leftedge = new Edge(temppoint,temppoint);
             while(i<4) {
 
                 //Filtrerar ner data till endast värden
@@ -84,6 +86,10 @@ public class StringCutter {
                     topedge = tempEdge;
                 else if (i == 1)
                     rightedge = tempEdge;
+                else if (i == 2)
+                    bottomedge = tempEdge;
+                else if (i == 3)
+                    leftedge = tempEdge;
 
                 StdDraw.line(xPoints[i],yPoints[i],xPoints[i+1],yPoints[i+1]);
 
@@ -92,7 +98,7 @@ public class StringCutter {
 
             //vi behöver skapa 4 edges för varje polygon, denna loopen ^ skapar en
             //Vi behöver skapa en array med polygoner som vi kan spara de i
-            Polygon.Polygonmath polygon = new Polygon.Polygonmath(topedge,rightedge,topedge,rightedge);
+            Polygon.Polygonmath polygon = new Polygon.Polygonmath(topedge,rightedge,bottomedge,leftedge);
             polys.add(new Polygon.Polygongfx(xPoints,yPoints,8));
 
         }
