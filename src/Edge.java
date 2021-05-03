@@ -1,11 +1,13 @@
 public class Edge implements Comparable<Point>{
     Point start;
     Point end;
+    double length;
     //Object direction;
 
-    public Edge(Point start, Point end){
+    public Edge(Point start, Point end,double length){
         this.start = start;
         this.end = end;
+        this.length = length;
     }
 
     public Point getStart() {
@@ -14,6 +16,10 @@ public class Edge implements Comparable<Point>{
 
     public Point getEnd() {
         return end;
+    }
+
+    public double getLength() {
+        return length;
     }
 
 

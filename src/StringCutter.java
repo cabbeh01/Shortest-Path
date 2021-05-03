@@ -63,10 +63,10 @@ public class StringCutter {
             Point temppoint = new Point(0,0);
 
             Edge tempEdge;
-            Edge topedge = new Edge(temppoint,temppoint);
-            Edge rightedge = new Edge(temppoint,temppoint);
-            Edge bottomedge = new Edge(temppoint,temppoint);
-            Edge leftedge = new Edge(temppoint,temppoint);
+            Edge topedge = new Edge(temppoint,temppoint,0);
+            Edge rightedge = new Edge(temppoint,temppoint,0);
+            Edge bottomedge = new Edge(temppoint,temppoint,0);
+            Edge leftedge = new Edge(temppoint,temppoint,0);
             while(i<4) {
 
                 //Filtrerar ner data till endast värden
@@ -82,13 +82,13 @@ public class StringCutter {
                 Point startpoint = new Point(xPoints[i],yPoints[i]);
                 Point endpoint = new Point(xPoints[i+1],yPoints[i+1]);
 
-                tempEdge = new Edge(startpoint,endpoint);
+                tempEdge = new Edge(startpoint,endpoint,length);
                 if (i == 0)
-                    topedge = tempEdge;
+                    bottomedge = tempEdge;
                 else if (i == 1)
                     rightedge = tempEdge;
                 else if (i == 2)
-                    bottomedge = tempEdge;
+                    topedge = tempEdge;
                 else if (i == 3)
                     leftedge = tempEdge;
 
@@ -99,13 +99,14 @@ public class StringCutter {
 
             //vi behöver skapa 4 edges för varje polygon, denna loopen ^ skapar en
             //Vi behöver skapa en array med polygoner som vi kan spara de i
-            Polygon.Polygonmath polygon = new Polygon.Polygonmath(topedge,rightedge,bottomedge,leftedge);
+            Polygon.Polygonmath polygon = new Polygon.Polygonmath(bottomedge,rightedge,topedge,leftedge);
             polys.add(new Polygon.Polygongfx(xPoints,yPoints,8));
             StdDraw.setPenColor(Color.BLACK);
             double rad = StdDraw.getPenRadius();
-            if(polygon.isInPoly(new Point(810,300))){
+            //Den ritar punkten vid polygon 2, tror vi måste definera hår långt åt sidorna den ska kolla
+            if(polygon.isInPoly(new Point(790,300))){
                 StdDraw.setPenColor(Color.red);
-                StdDraw.circle(810,300,2);
+                StdDraw.circle(790,300,2);
 
             }
             StdDraw.setPenRadius(rad);
