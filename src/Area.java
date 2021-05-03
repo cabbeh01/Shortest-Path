@@ -85,7 +85,8 @@ public class Area extends JPanel {
         g2d.setColor(Color.BLACK);
 
         for(Polygon a : SC.polys){
-            //g2d.fillPolygon(a.xarray,a.yarray,8);
+            g2d.fillPolygon(a.xarray,a.yarray,8);
+
         }
 
 

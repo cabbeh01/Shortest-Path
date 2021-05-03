@@ -94,7 +94,7 @@ public class StringCutter {
             //vi behöver skapa 4 edges för varje polygon, denna loopen ^ skapar en
             //Vi behöver skapa en array med polygoner som vi kan spara de i
             Polygon polygon = new Polygon(topedge,rightedge,topedge,rightedge);
-            //polys.add(new Polygon(xPoints,yPoints,8));
+            polys.add(polygon);
 
 
         }
