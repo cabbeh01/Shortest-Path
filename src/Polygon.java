@@ -13,26 +13,20 @@ public class Polygon {
 
         public boolean isInPoly(Point p){
 
-            //Vi måste slå ut negativa tal
-            double distance1 = top.end.y - p.y;
-            double distance2 = right.end.x - p.x;
-            double distance3 = left.end.x - p.x;
-            double distance4 = bottom.end.y - p.y;
-
             //Vi måste kolla om den är till vänster och hur långt ifrån
-            if(top.compareTo(p)>0 && distance1 > 0 && distance1 < left.length){
+            if(top.compareTo(p)>0 && p.x < top.end.x && p.x > top.start.x){
                 return true;
             }
 
-            if(right.compareTo(p)>0 && distance2 > 0 && distance2 < top.length){
+            if(right.compareTo(p)>0 && p.x < right.end.x && p.x > right.start.x){
                 return true;
             }
 
-            if(left.compareTo(p)>0 && distance3 > 0 && distance3 < bottom.length){
+            if(left.compareTo(p)>0 && p.x < left.end.x && p.x > left.start.x){
                 return true;
             }
 
-            if(bottom.compareTo(p)>0 && distance4 > 0 && distance4 < right.length){
+            if(bottom.compareTo(p)>0 && p.x < bottom.end.x && p.x > bottom.start.x){
                 return true;
             }
 
