@@ -13,7 +13,7 @@ public class Polygon {
 
         public boolean isInPoly(Point p){
 
-            //Vi måste kolla om den är till vänster och hur långt ifrån
+            //Vi måste kolla om den är till vänster och hur långt ifrån. Kanske något x som ska vara y
             if(top.compareTo(p)>0 && p.x < top.end.x && p.x > top.start.x){
                 return true;
             }
