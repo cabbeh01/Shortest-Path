@@ -18,7 +18,6 @@ public class StringCutter {
 
         System.out.println(System.getProperty("user.dir")+"\\"+"maps"+"\\"+file);
 
-
         String bound = inp.nextLine();
 
         //Pattern p = Pattern.compile("\\([^)]*\\)");
@@ -69,6 +68,14 @@ public class StringCutter {
                 xPoints[i+1] = (int)Double.parseDouble(dat[2]);
                 yPoints[i+1] = (int)Double.parseDouble(dat[3]);
                 length = (int)Double.parseDouble(dat[4]);
+
+                //Vi använder din loop och går igenom en kant i taget efter loopen bygger vi polygonen innan vi går till nästa polygon
+                Point startpoint = new Point(xPoints[i],yPoints[i]);
+                Point endpoint = new Point(xPoints[i+1],yPoints[i+1]);
+
+                Edge newEdge = new Edge(startpoint,endpoint);
+
+                //Polygon polygon = new Polygon();
 
                 StdDraw.line(xPoints[i],yPoints[i],xPoints[i+1],yPoints[i+1]);
                 i++;
