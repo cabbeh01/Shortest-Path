@@ -96,6 +96,7 @@ public class StringCutter {
             Polygon polygon = new Polygon(topedge,rightedge,topedge,rightedge);
             //polys.add(new Polygon(xPoints,yPoints,8));
 
+
         }
     }
 
