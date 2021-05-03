@@ -56,8 +56,15 @@ public class StringCutter {
             inp.nextLine();
             int i = 0;
             int length = 0;
+
             int[] xPoints = new int[8];
             int[] yPoints = new int[8];
+
+            Point temppoint = new Point(0,0);
+
+            Edge tempEdge;
+            Edge topedge = new Edge(temppoint,temppoint);
+            Edge rightedge = new Edge(temppoint,temppoint);
             while(i<4) {
 
                 //Filtrerar ner data till endast värden
@@ -73,14 +80,20 @@ public class StringCutter {
                 Point startpoint = new Point(xPoints[i],yPoints[i]);
                 Point endpoint = new Point(xPoints[i+1],yPoints[i+1]);
 
-                Edge newEdge = new Edge(startpoint,endpoint);
-
-                //Polygon polygon = new Polygon();
+                tempEdge = new Edge(startpoint,endpoint);
+                if (i == 0)
+                    topedge = tempEdge;
+                else if (i == 1)
+                    rightedge = tempEdge;
 
                 StdDraw.line(xPoints[i],yPoints[i],xPoints[i+1],yPoints[i+1]);
+
                 i++;
             }
 
+            //vi behöver skapa 4 edges för varje polygon, denna loopen ^ skapar en
+            //Vi behöver skapa en array med polygoner som vi kan spara de i
+            Polygon polygon = new Polygon(topedge,rightedge,topedge,rightedge);
             //polys.add(new Polygon(xPoints,yPoints,8));
 
         }

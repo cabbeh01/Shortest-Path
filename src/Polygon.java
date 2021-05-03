@@ -1,7 +1,7 @@
 public class Polygon {
-    int[] xarray;
-    int[] yarray;
-    int npoint;
+    //int[] xarray;
+    //int[] yarray;
+    //int npoint;
 
     Edge top, right, bottom, left;
 
@@ -18,7 +18,7 @@ public class Polygon {
         this.left = left;
     }
 
-    public int[] getX() {
+    /*public int[] getX() {
         return xarray;
     }
 
@@ -26,5 +26,5 @@ public class Polygon {
         return yarray;
     }
 
-    public int getNpoint() {return npoint; }
+    public int getNpoint() {return npoint; }*/
 }
