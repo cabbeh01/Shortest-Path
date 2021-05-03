@@ -10,6 +10,27 @@ public class Polygon {
             this.bottom = bottom;
             this.left = left;
         }
+
+        public boolean isInPoly(Point p){
+
+            if(top.compareTo(p)>0){
+                return false;
+            }
+
+            if(right.compareTo(p)>0){
+                return false;
+            }
+
+            if(left.compareTo(p)<0){
+                return false;
+            }
+
+            if(bottom.compareTo(p)<0){
+                return false;
+            }
+
+            return true;
+        }
     }
 
     public static class Polygongfx {

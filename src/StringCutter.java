@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -8,14 +9,14 @@ public class StringCutter {
     File nFile;
     Scanner inp;
     public static int[] boundary = new int[4];
-    public ArrayList<Polygon.Polygongfx> polys = new ArrayList<Polygon.Polygongfx>();
+    public ArrayList<Polygon.Polygongfx> polys = new ArrayList<>();
 
 
     public StringCutter(String file) throws FileNotFoundException {
         nFile = new File(System.getProperty("user.dir")+"\\"+"maps"+"\\"+file);
         inp = new Scanner(nFile);
 
-        System.out.println(System.getProperty("user.dir")+"\\"+"maps"+"\\"+file);
+        //System.out.println(System.getProperty("user.dir")+"\\"+"maps"+"\\"+file);
 
         String bound = inp.nextLine();
 
@@ -100,6 +101,15 @@ public class StringCutter {
             //Vi behöver skapa en array med polygoner som vi kan spara de i
             Polygon.Polygonmath polygon = new Polygon.Polygonmath(topedge,rightedge,bottomedge,leftedge);
             polys.add(new Polygon.Polygongfx(xPoints,yPoints,8));
+            StdDraw.setPenColor(Color.BLACK);
+            double rad = StdDraw.getPenRadius();
+            if(polygon.isInPoly(new Point(810,300))){
+                StdDraw.setPenColor(Color.red);
+                StdDraw.circle(810,300,2);
+
+            }
+            StdDraw.setPenRadius(rad);
+            StdDraw.setPenColor(Color.BLACK);
 
         }
     }

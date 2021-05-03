@@ -82,7 +82,7 @@ public class Area extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setColor(Color.BLACK);
-        g2d.scale(0.5,0.5);
+        //g2d.scale(0.5,0.5);
         g2d.rotate(-(Math.PI/2),500,500);
         for(Polygon.Polygongfx a : SC.polys){
             g2d.fillPolygon(a.yarray,a.xarray,8);
