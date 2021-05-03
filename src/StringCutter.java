@@ -104,15 +104,25 @@ public class StringCutter {
             StdDraw.setPenColor(Color.BLACK);
             double rad = StdDraw.getPenRadius();
             //Den ritar punkten vid polygon 2, tror vi måste definera hår långt åt sidorna den ska kolla
-            if(polygon.isInPoly(new Point(750,300))){
+            if(polygon.isInPoly(new Point(400,470))){
                 StdDraw.setPenColor(Color.red);
-                StdDraw.circle(750,300,2);
-
+                StdDraw.circle(400,470,2);
             }
-            if(polygon.isInPoly(new Point(810,300))){
+            if(polygon.isInPoly(new Point(500,400))){
                 StdDraw.setPenColor(Color.blue);
-                StdDraw.circle(810,300,2);
-
+                StdDraw.circle(500,400,2);
+            }
+            if(polygon.isInPoly(new Point(670,400))){
+                StdDraw.setPenColor(Color.green);
+                StdDraw.circle(670,400,2);
+            }
+            if(polygon.isInPoly(new Point(500,600))){
+                StdDraw.setPenColor(Color.cyan);
+                StdDraw.circle(500,600,2);
+            }
+            if(polygon.isInPoly(new Point(500,300))){
+                StdDraw.setPenColor(Color.magenta);
+                StdDraw.circle(500,300,2);
             }
             StdDraw.setPenRadius(rad);
             StdDraw.setPenColor(Color.BLACK);

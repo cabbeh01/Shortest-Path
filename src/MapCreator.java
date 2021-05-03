@@ -32,7 +32,7 @@ public class MapCreator {
         //*StdDraw.line(442,377,599,377);
 
         try {
-            new StringCutter("area1.txt");
+            new StringCutter("testarea.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
