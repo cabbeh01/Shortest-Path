@@ -108,13 +108,9 @@ public class StringCutter {
                 StdDraw.setPenColor(Color.red);
                 StdDraw.circle(400,470,2);
             }
-            if(polygon.isInPoly(new Point(500,400))){
+            if(polygon.isInPoly(new Point(530,400))){
                 StdDraw.setPenColor(Color.blue);
-                StdDraw.circle(500,400,2);
-            }
-            if(polygon.isInPoly(new Point(670,400))){
-                StdDraw.setPenColor(Color.green);
-                StdDraw.circle(670,400,2);
+                StdDraw.circle(530,400,2);
             }
             if(polygon.isInPoly(new Point(500,600))){
                 StdDraw.setPenColor(Color.cyan);

@@ -17,7 +17,7 @@ public class Polygon {
             double distance = right.length - p.y;
 
             //Vi måste kolla om den är till vänster och hur långt ifrån. Kanske något x som ska vara y
-            if(top.compareTo(p)>0 && p.x < top.end.x && p.x > top.start.x && top.end.y - p.y > 0 && top.end.y -p.y < left.length){
+            /*if(top.compareTo(p)>0 && p.x < top.end.x && p.x > top.start.x && top.end.y - p.y > 0 && top.end.y -p.y < left.length){
                 return true;
             }
 
@@ -31,10 +31,10 @@ public class Polygon {
 
             if(bottom.compareTo(p)>0 && p.x < bottom.start.x && p.x > bottom.end.x && bottom.end.y - p.y > 0 && bottom.end.y - p.y < right.length){
                 return true;
-            }
+            }*/
 
-            /*if (top.compareTo(p)>0 && bottom.compareTo(p)>0 && left.compareTo(p)>0 && right.compareTo(p)>0)
-                return true;*/
+            if (top.compareTo(p)>0 && bottom.compareTo(p)>0 && left.compareTo(p)>0 && right.compareTo(p)>0)
+                return true;
 
             return false;
         }

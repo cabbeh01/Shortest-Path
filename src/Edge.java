@@ -31,10 +31,12 @@ public class Edge implements Comparable<Point>{
 
         //x3 = ny punkt
 
-        double dx1 = (end.getX() - start.getY());
+        double dx1 = (end.getX() - start.getX());
         double dy1 = (end.getY() - start.getY());
         double dx2 = (point.getX() - start.getX()); //x3 -x1;
         double dy2 = (point.getY() - start.getY()); //y3 -y1;
+
+
         double compare = (dx1*dy2 - dy1*dx2);
         if(compare>0){//Större än noll så är den inuti
             return 1;
