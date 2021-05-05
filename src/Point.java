@@ -1,6 +1,7 @@
 public class Point {
     double x;
     double y;
+    int id;
 
     public Point(double x, double y){
         this.x = x;
@@ -13,5 +14,13 @@ public class Point {
 
     public double getY() {
         return y;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }

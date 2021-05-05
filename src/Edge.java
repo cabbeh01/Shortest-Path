@@ -2,12 +2,14 @@ public class Edge implements Comparable<Point>{
     Point start;
     Point end;
     double length;
+    int id;
     //Object direction;
 
-    public Edge(Point start, Point end,double length){
+    public Edge(Point start, Point end,double length,int id){
         this.start = start;
         this.end = end;
         this.length = length;
+        this.id = id;
     }
 
     public Point getStart() {
@@ -22,15 +24,10 @@ public class Edge implements Comparable<Point>{
         return length;
     }
 
-
     @Override
     public int compareTo(Point point) {
 
-        //x1 = start
-        //x2 = slut
-
-        //x3 = ny punkt
-
+        //x1 = start x2 = slut x3 = ny punkt
         double dx1 = (end.getX() - start.getX());
         double dy1 = (end.getY() - start.getY());
         double dx2 = (point.getX() - start.getX()); //x3 -x1;

@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class StringCutter {
@@ -9,35 +9,24 @@ public class StringCutter {
     File nFile;
     Scanner inp;
     public static int[] boundary = new int[4];
-    public ArrayList<Polygon.Polygongfx> polys = new ArrayList<>();
-
 
     public StringCutter(String file) throws FileNotFoundException {
         nFile = new File(System.getProperty("user.dir")+"\\"+"maps"+"\\"+file);
         inp = new Scanner(nFile);
 
-        //System.out.println(System.getProperty("user.dir")+"\\"+"maps"+"\\"+file);
-
         String bound = inp.nextLine();
 
-        //Pattern p = Pattern.compile("\\([^)]*\\)");
+        //Gettinge the bound
         bound = bound.replaceAll("[()]","").replaceAll("[A-Za-z:]","");
-        String [] test = bound.split("[, ]");
-        //String [] test = bound.split(",");
+        String [] boundArr = bound.split("[, ]");
 
-
-        for(String a: test){
+        for(String a: boundArr){
             System.out.println(a);
-
         }
-        //System.out.println((int)Double.parseDouble(test[1]));
-        //System.out.println((int)Double.parseDouble(test[2]));
-        //System.out.println((int)Double.parseDouble(test[3]));
-        //System.out.println((int)Double.parseDouble(test[4]));
 
         System.out.println(bound);
         for(int i= 1; i<=4;i++){
-            boundary[i-1] = (int)Double.parseDouble(test[i]);
+            boundary[i-1] = (int)Double.parseDouble(boundArr[i]);
         }
 
         //System.out.println("("+boundary[0] +","+boundary[1]+")");
@@ -46,13 +35,13 @@ public class StringCutter {
         //Kvar att fixa är att göra om bindarys till en tvådim array. För tillfälligt ligger
         //Värdena i en array
 
-
-        //--Samt måste vi fixa inskanning av punkter på en polygon
-
         //Läser in koordinater i textfilerna och skapar Polygoner av det
         //Kan hända att vi måste skapa Kanter av det och sedan bygga Polygoner av kanterna
+
+        int idEdge = 0;
         while(inp.hasNext()){
-            inp.nextLine();
+
+            int id = Integer.parseInt(inp.nextLine().replaceAll("Polygon: ",""));
             inp.nextLine();
             int i = 0;
             int length = 0;
@@ -62,11 +51,12 @@ public class StringCutter {
 
             Point temppoint = new Point(0,0);
 
-            Edge tempEdge;
-            Edge topedge = new Edge(temppoint,temppoint,0);
-            Edge rightedge = new Edge(temppoint,temppoint,0);
-            Edge bottomedge = new Edge(temppoint,temppoint,0);
-            Edge leftedge = new Edge(temppoint,temppoint,0);
+            Edge[] edges = new Edge[4];
+           // Edge tempEdge;
+            //Edge topedge = new Edge(temppoint,temppoint,0);
+            //Edge rightedge = new Edge(temppoint,temppoint,0);
+            //Edge bottomedge = new Edge(temppoint,temppoint,0);
+            //Edge leftedge = new Edge(temppoint,temppoint,0);
             while(i<4) {
 
                 //Filtrerar ner data till endast värden
@@ -82,41 +72,44 @@ public class StringCutter {
                 Point startpoint = new Point(xPoints[i],yPoints[i]);
                 Point endpoint = new Point(xPoints[i+1],yPoints[i+1]);
 
-                tempEdge = new Edge(startpoint,endpoint,length);
-                if (i == 0)
-                    bottomedge = tempEdge;
-                else if (i == 1)
-                    rightedge = tempEdge;
-                else if (i == 2)
-                    topedge = tempEdge;
-                else if (i == 3)
-                    leftedge = tempEdge;
+                edges[i] = new Edge(startpoint,endpoint,length,idEdge);
+                /*switch (i) {
+                    case 0 -> bottomedge = tempEdge;
+                    case 1 -> rightedge = tempEdge;
+                    case 2 -> topedge = tempEdge;
+                    case 3 -> leftedge = tempEdge;
+                }*/
 
                 StdDraw.line(xPoints[i],yPoints[i],xPoints[i+1],yPoints[i+1]);
 
                 i++;
+                idEdge++;
             }
 
             //vi behöver skapa 4 edges för varje polygon, denna loopen ^ skapar en
             //Vi behöver skapa en array med polygoner som vi kan spara de i
-            Polygon.Polygonmath polygon = new Polygon.Polygonmath(bottomedge,rightedge,topedge,leftedge);
-            polys.add(new Polygon.Polygongfx(xPoints,yPoints,8));
+            Polygon polygon = new Polygon(edges,xPoints,yPoints,8,id);
+            MapCreator.polys.add(polygon);
+            Graph.a.addAll(Arrays.asList(polygon.edges));
+            Graph.ap.add(polygon);
+
+
             StdDraw.setPenColor(Color.BLACK);
             double rad = StdDraw.getPenRadius();
             //Den ritar punkten vid polygon 2, tror vi måste definera hår långt åt sidorna den ska kolla
-            if(polygon.isInPoly(new Point(400,470))){
+            if(Polygon.isInPoly(polygon,new Point(400,470))){
                 StdDraw.setPenColor(Color.red);
                 StdDraw.circle(400,470,2);
             }
-            if(polygon.isInPoly(new Point(530,400))){
+            if(Polygon.isInPoly(polygon,new Point(530,400))){
                 StdDraw.setPenColor(Color.blue);
                 StdDraw.circle(530,400,2);
             }
-            if(polygon.isInPoly(new Point(500,600))){
+            if(Polygon.isInPoly(polygon,new Point(500,600))){
                 StdDraw.setPenColor(Color.cyan);
                 StdDraw.circle(500,600,2);
             }
-            if(polygon.isInPoly(new Point(500,300))){
+            if(Polygon.isInPoly(polygon,new Point(500,300))){
                 StdDraw.setPenColor(Color.magenta);
                 StdDraw.circle(500,300,2);
             }
@@ -125,5 +118,4 @@ public class StringCutter {
 
         }
     }
-
 }

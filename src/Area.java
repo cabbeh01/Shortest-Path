@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Area extends JPanel {
@@ -20,6 +21,8 @@ public class Area extends JPanel {
             e.printStackTrace();
         }
     }
+
+
 
     /*
     //Variable to see if the game is paused
@@ -66,12 +69,9 @@ public class Area extends JPanel {
     }
 */
 
-    //The paint component to draw the panel and calling the paint function on the balls
+    //The paint component to draw the panel
     @Override
     public void paint(Graphics g) {
-
-        //Getting the properties from the original paint class so
-        //so we just adding our code to it and don't re writes it
         super.paint(g);
 
         Graphics2D g2d = (Graphics2D)g;
@@ -84,14 +84,8 @@ public class Area extends JPanel {
         g2d.setColor(Color.BLACK);
         //g2d.scale(0.5,0.5);
         g2d.rotate(-(Math.PI/2),500,500);
-        for(Polygon.Polygongfx a : SC.polys){
+        for(Polygon a : MapCreator.polys){
             g2d.fillPolygon(a.yarray,a.xarray,8);
         }
-
-
-        //g2d.fillP
-
-        //Drawing the contour
-        //g2d.fillOval(998,950,1,1);
     }
 }
