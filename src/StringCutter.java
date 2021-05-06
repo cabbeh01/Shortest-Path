@@ -79,9 +79,6 @@ public class StringCutter {
                     case 2 -> topedge = tempEdge;
                     case 3 -> leftedge = tempEdge;
                 }*/
-
-                StdDraw.line(xPoints[i],yPoints[i],xPoints[i+1],yPoints[i+1]);
-
                 i++;
                 idEdge++;
             }
@@ -92,30 +89,6 @@ public class StringCutter {
             MapCreator.polys.add(polygon);
             Graph.a.addAll(Arrays.asList(polygon.edges));
             Graph.ap.add(polygon);
-
-
-            StdDraw.setPenColor(Color.BLACK);
-            double rad = StdDraw.getPenRadius();
-            //Den ritar punkten vid polygon 2, tror vi måste definera hår långt åt sidorna den ska kolla
-            if(Polygon.isInPoly(polygon,new Point(400,470))){
-                StdDraw.setPenColor(Color.red);
-                StdDraw.circle(400,470,2);
-            }
-            if(Polygon.isInPoly(polygon,new Point(530,400))){
-                StdDraw.setPenColor(Color.blue);
-                StdDraw.circle(530,400,2);
-            }
-            if(Polygon.isInPoly(polygon,new Point(500,600))){
-                StdDraw.setPenColor(Color.cyan);
-                StdDraw.circle(500,600,2);
-            }
-            if(Polygon.isInPoly(polygon,new Point(500,300))){
-                StdDraw.setPenColor(Color.magenta);
-                StdDraw.circle(500,300,2);
-            }
-            StdDraw.setPenRadius(rad);
-            StdDraw.setPenColor(Color.BLACK);
-
         }
     }
 }

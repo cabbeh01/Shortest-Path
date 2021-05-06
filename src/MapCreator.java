@@ -8,11 +8,9 @@ public class MapCreator {
 
     public static void main(String[] args) {
 
-        StdDraw.setXscale(0,1000);
-        StdDraw.setYscale(0,1000);
-
         JFrame map = new JFrame("Map");
         map.setPreferredSize(new Dimension(1000, 1000));
+
 
         map.pack();
         map.setVisible(true);
@@ -30,8 +28,42 @@ public class MapCreator {
 
         //*StdDraw.line(442,377,599,377);
 
+        StdDraw.setXscale(0,1000);
+        StdDraw.setYscale(0,1000);
 
         Graph g = new Graph(polys.size()*4);
+
+        //Drawing part which draws the StdDraw stuff
+        for(Polygon p : Graph.ap){
+
+            for(int i = 0; i<p.edges.length; i++){
+                StdDraw.line(p.xarray[i],p.yarray[i],p.xarray[i+1],p.yarray[i+1]);
+            }
+
+
+            StdDraw.setPenColor(Color.BLACK);
+            double rad = StdDraw.getPenRadius();
+            //Den ritar punkten vid polygon 2, tror vi måste definera hår långt åt sidorna den ska kolla
+            if(Polygon.isInPoly(p,new Point(400,470))){
+                StdDraw.setPenColor(Color.red);
+                StdDraw.circle(400,470,2);
+            }
+            if(Polygon.isInPoly(p,new Point(530,400))){
+                StdDraw.setPenColor(Color.blue);
+                StdDraw.circle(530,400,2);
+            }
+            if(Polygon.isInPoly(p,new Point(500,600))){
+                StdDraw.setPenColor(Color.cyan);
+                StdDraw.circle(500,600,2);
+            }
+            if(Polygon.isInPoly(p,new Point(500,300))){
+                StdDraw.setPenColor(Color.magenta);
+                StdDraw.circle(500,300,2);
+            }
+            StdDraw.setPenRadius(rad);
+            StdDraw.setPenColor(Color.BLACK);
+        }
+
 
         for(Edge c : Graph.a){
             for(Edge d : Graph.a){
