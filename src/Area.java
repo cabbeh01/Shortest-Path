@@ -79,13 +79,18 @@ public class Area extends JPanel {
         this.setBackground(Color.WHITE);
 
         //Enabling antialias to get a smoother experience
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        //g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setColor(Color.BLACK);
-        //g2d.scale(0.5,0.5);
-        g2d.rotate(-(Math.PI/2),500,500);
+        g2d.scale(0.95,0.95);
+        g2d.rotate(-(Math.PI/2),510,510);
         for(Polygon a : MapCreator.polys){
             g2d.fillPolygon(a.yarray,a.xarray,8);
         }
+
+        g2d.setColor(Color.RED);
+        g2d.fillOval(50,50,20,20);
+        g2d.setColor(Color.GREEN);
+        g2d.fillOval(950,950,20,20);
     }
 }
