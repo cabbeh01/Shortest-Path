@@ -11,8 +11,8 @@ public class Area extends JPanel {
     StringCutter SC;
 
     //Points for the start and end-point
-    Point start;
-    Point End;
+    Point start = new Point(50,50);
+    Point end  = new Point(950,950);
 
     public Area(){
         try {
@@ -82,15 +82,15 @@ public class Area extends JPanel {
         //g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setColor(Color.BLACK);
-        g2d.scale(0.95,0.95);
-        g2d.rotate(-(Math.PI/2),510,510);
+        g2d.scale(0.70,0.70);
+        g2d.rotate(-(Math.PI/2),530,530);
         for(Polygon a : MapCreator.polys){
             g2d.fillPolygon(a.yarray,a.xarray,8);
         }
 
         g2d.setColor(Color.RED);
-        g2d.fillOval(50,50,20,20);
+        g2d.fillOval((int)start.x,(int)start.y,20,20);
         g2d.setColor(Color.GREEN);
-        g2d.fillOval(950,950,20,20);
+        g2d.fillOval((int)end.x,(int)end.y,20,20);
     }
 }

@@ -1,29 +1,38 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MapCreator {
 
     public static ArrayList<Polygon> polys = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         JFrame map = new JFrame("Map");
-        map.setPreferredSize(new Dimension(1000, 1000));
+        map.setPreferredSize(new Dimension(1000, 800));
 
 
         map.pack();
         map.setVisible(true);
 
         JPanel area = new Area();
+        JPanel control = new ControlArea();
 
         area.setPreferredSize(new Dimension(map.getWidth(),map.getHeight()));
         map.add(area);
+        control.setPreferredSize(new Dimension(250,200));
+        map.add(control,BorderLayout.EAST);
 
         map.setTitle("Shortest Path");
         map.setResizable(false);
         map.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         map.setVisible(true);
+
+        //Icon to the program
+        map.setIconImage(ImageIO.read(new File("res/icon.png")));
         //System.out.println(map);
 
         //*StdDraw.line(442,377,599,377);
@@ -39,7 +48,6 @@ public class MapCreator {
             for(int i = 0; i<p.edges.length; i++){
                 StdDraw.line(p.xarray[i],p.yarray[i],p.xarray[i+1],p.yarray[i+1]);
             }
-
 
             StdDraw.setPenColor(Color.BLACK);
             double rad = StdDraw.getPenRadius();
@@ -124,8 +132,6 @@ public class MapCreator {
 
 
 
-        //Icon to the program
-        //map.setIconImage(ImageIO.read(new File("res/icon.png")));
     }
 
 }
