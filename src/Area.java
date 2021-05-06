@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Area extends JPanel {
@@ -11,19 +12,28 @@ public class Area extends JPanel {
     StringCutter SC;
 
     //Points for the start and end-point
-    Point start = new Point(50,50);
-    Point end  = new Point(950,950);
+    static Point start = new Point(50,50);
+    static Point end  = new Point(950,950);
 
     public Area(){
         try {
             SC = new StringCutter("area1.txt");
+            generateUsablePoints();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
 
-
+    public void generateUsablePoints(){
+        for(Polygon pol : Graph.ap){
+            Graph.points.addAll(Arrays.asList(pol.getCorners()));
+        }
+        for(Polygon poly : Graph.ap){
+            Graph.points.removeIf(p -> Polygon.isInPoly(poly, p));
+        }
+        this.repaint();
+    }
     /*
     //Variable to see if the game is paused
     public boolean paused = false;
@@ -92,5 +102,48 @@ public class Area extends JPanel {
         g2d.fillOval((int)start.x,(int)start.y,20,20);
         g2d.setColor(Color.GREEN);
         g2d.fillOval((int)end.x,(int)end.y,20,20);
+
+
+
+        g2d.setColor(Color.MAGENTA);
+
+        /*
+        for(Polygon p : Graph.ap){
+            for(int i = 0; i< p.getCorners().length; i++){
+                g2d.fillOval(p.getY()[i]-5,p.getX()[i]-5,10,10);
+            }
+        }*/
+
+
+        for(Point p : Graph.points){
+            g2d.fillOval((int)p.getY()-5,(int)p.getX()-5,10,10);
+        }
+
+
+        /*int s = r.nextInt() * 5;
+        if(s>2.5){
+            g2d.setColor(Color.blue);
+        }
+        else{
+            g2d.setColor(Color.red);
+        }*/
+        /*
+        for(Edge c : Graph.a){
+            for(Edge d : Graph.a){
+                if(!c.equals(d)){
+                    if(!Polygon.edgeCrossEdge(c,d)){
+                        continue;
+                    }
+                    if(Polygon.edgeCrossesPoly(Graph.ap.get(3), d)){
+                        continue;
+                    }
+                    g2d.drawLine((int)c.start.y,(int)c.start.x,(int)d.start.y,(int)d.start.x);
+                    //g2d.drawLine((int)c.start.y,(int)c.end.x,(int)d.start.y,(int)d.end.x);
+
+                }
+            }
+        }*/
+
+        g2d.setColor(Color.BLACK);
     }
 }

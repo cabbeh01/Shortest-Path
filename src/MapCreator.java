@@ -4,6 +4,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MapCreator {
 
@@ -19,7 +20,7 @@ public class MapCreator {
         map.setVisible(true);
 
         JPanel area = new Area();
-        JPanel control = new ControlArea();
+        JPanel control = new ControlArea(map);
 
         area.setPreferredSize(new Dimension(map.getWidth(),map.getHeight()));
         map.add(area);
@@ -73,20 +74,18 @@ public class MapCreator {
         }
 
 
+
         for(Edge c : Graph.a){
             for(Edge d : Graph.a){
                 if(!c.equals(d)){
-                    if(Polygon.edgeCrossEdge(c,d)){
+                    if(!Polygon.edgeCrossEdge(c,d)){
                        continue;
                     }
 
 
                     g.addEdge(c.id,d.id);
                     StdDraw.setPenColor(Color.RED);
-                    StdDraw.line(c.start.x,c.end.y,d.start.x,d.end.y);
-                    StdDraw.line(c.end.x,c.start.y,d.end.x,d.start.y);
-                    StdDraw.line(c.start.x,c.start.y,d.end.x,d.end.y);
-                    StdDraw.line(c.end.x,c.end.y,d.start.x,d.start.y);
+                    StdDraw.line(c.start.x,c.start.y,d.start.x,d.start.y);
                 }
             }
         }
@@ -129,8 +128,6 @@ public class MapCreator {
                 }
             }
         }*/
-
-
 
     }
 

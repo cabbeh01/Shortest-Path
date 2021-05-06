@@ -20,15 +20,20 @@ public class Polygon {
     }
 
     public static boolean edgeCrossesPoly(Polygon p ,Edge a){
-        if((p.getRight().start == a.start && p.getTop().end == a.end) ||
-                (p.getRight().start == a.end && p.getTop().end == a.start)){
-            return true;
+        for(int i = 0; i<p.edges.length; i++){
+            if(i%2 == 0){
+                if((p.edges[i].end == a.end)){
+                    return false;
+                }
+            }
+            else {
+                if((p.edges[i].start == a.end)){
+                    return false;
+                }
+            }
         }
-        else if((p.getRight().end == a.start && p.getBottom().start == a.end) ||
-                (p.getRight().end == a.end && p.getBottom().start == a.start)){
-            return true;
-        }
-        return false;
+
+        return true;
     }
 
     public static boolean edgeCrossEdge(Edge a, Edge b){
