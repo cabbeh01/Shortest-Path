@@ -73,22 +73,18 @@ public class MapCreator {
             StdDraw.setPenColor(Color.BLACK);
         }
 
-
+/*
 
         for(Edge c : Graph.a){
             for(Edge d : Graph.a){
                 if(!c.equals(d)){
-                    if(!Polygon.edgeCrossEdge(c,d)){
-                       continue;
-                    }
-
 
                     g.addEdge(c.id,d.id);
                     StdDraw.setPenColor(Color.RED);
                     StdDraw.line(c.start.x,c.start.y,d.start.x,d.start.y);
                 }
             }
-        }
+        }*/
 /*
         int pointid = 0;
         for(Polygon c : Graph.ap){

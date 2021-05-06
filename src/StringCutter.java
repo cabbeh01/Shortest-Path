@@ -87,7 +87,7 @@ public class StringCutter {
             //Vi behöver skapa en array med polygoner som vi kan spara de i
             Polygon polygon = new Polygon(edges,xPoints,yPoints,8,id);
             MapCreator.polys.add(polygon);
-            Graph.a.addAll(Arrays.asList(polygon.edges));
+            //Graph.a.addAll(Arrays.asList(polygon.edges));
             Graph.ap.add(polygon);
         }
     }

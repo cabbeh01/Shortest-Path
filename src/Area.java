@@ -19,18 +19,44 @@ public class Area extends JPanel {
         try {
             SC = new StringCutter("area1.txt");
             generateUsablePoints();
+            generateUsableEdges();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-
+    //Denna metod gör att vi hittar hörnpunkterna på byggnaderna utifrån de
+    //koordinater som vi har
     public void generateUsablePoints(){
         for(Polygon pol : Graph.ap){
             Graph.points.addAll(Arrays.asList(pol.getCorners()));
         }
         for(Polygon poly : Graph.ap){
             Graph.points.removeIf(p -> Polygon.isInPoly(poly, p));
+        }
+        this.repaint();
+    }
+
+    public void generateUsableEdges(){
+
+        Graph.a.clear();
+        ArrayList<Edge> edges = new ArrayList<>();
+        ArrayList<Edge> edges2 = new ArrayList<>();
+        int id = 0;
+        for(Point a : Graph.points){
+            for(Point b: Graph.points){
+                if(!a.equals(b)){
+                    edges.add(new Edge(a,b,0,id++));
+                }
+            }
+        }
+
+        for(Polygon poly : Graph.ap){
+            for(Edge e : edges){
+                if(Polygon.edgeCrossesPoly(poly,e)){
+                    Graph.a.add(e);
+                }
+            }
         }
         this.repaint();
     }
@@ -117,6 +143,12 @@ public class Area extends JPanel {
 
         for(Point p : Graph.points){
             g2d.fillOval((int)p.getY()-5,(int)p.getX()-5,10,10);
+        }
+
+
+        g2d.setColor(Color.BLUE);
+        for(Edge e1 : Graph.a){
+            g2d.drawLine((int)e1.start.getY(),(int)e1.start.getX(),(int)e1.end.getY(),(int)e1.end.getX());
         }
 
 
