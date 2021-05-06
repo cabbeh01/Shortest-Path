@@ -60,7 +60,7 @@ public class Polygon {
     public static boolean edgeNotCrossEdge(Edge a, Edge b){
 
         if(isPointOnLine(a, b.start) || isPointOnLine(a, b.end)){
-            return false;
+            return true;
         }
         else
 
