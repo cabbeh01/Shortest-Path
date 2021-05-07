@@ -1,4 +1,3 @@
-import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -38,11 +37,11 @@ public class Area extends JPanel {
         this.repaint();
     }
 
+
+
     public void generateUsableEdges(){
-
-
         ArrayList<Edge> edges = new ArrayList<>();
-        ArrayList<Edge> edges2 = new ArrayList<>();
+        //ArrayList<Edge> edges2 = new ArrayList<>();
         int id = 0;
         for(Point a : Graph.points){
             for(Point b: Graph.points){
@@ -52,12 +51,13 @@ public class Area extends JPanel {
             }
         }
 
-
         System.out.println("Antalet punkter: " + Graph.points.size());
         Graph.a.clear();
         System.out.println("Antalet Polygoner: " + Graph.ap.size());
-        for(Polygon poly : Graph.ap){
-            for(Edge e : edges){
+
+
+        for(Edge e : edges){
+            for(Polygon poly : Graph.ap){
                 if(!Graph.a.contains(e)){
                     if(!Polygon.edgeCrossesPoly(poly,e)){
                         Graph.a.add(e);
@@ -65,6 +65,8 @@ public class Area extends JPanel {
                 }
             }
         }
+
+
         this.repaint();
     }
     /*
@@ -125,8 +127,8 @@ public class Area extends JPanel {
         //g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setColor(Color.BLACK);
-        g2d.scale(0.70,0.70);
-        g2d.rotate(-(Math.PI/2),530,530);
+        g2d.scale(0.72,0.72);
+        g2d.rotate(-(Math.PI/2),520,520);
         for(Polygon a : MapCreator.polys){
             g2d.fillPolygon(a.yarray,a.xarray,8);
         }

@@ -1,5 +1,3 @@
-import jdk.dynalink.linker.LinkerServices;
-
 public class Polygon {
 
     int[] xarray;
@@ -24,26 +22,31 @@ public class Polygon {
         Edge temp1 = new Edge(p.edges[0].start,p.edges[2].start,0,0);
         Edge temp2 = new Edge(p.edges[3].start,p.edges[1].start,0,0);
 
-        int ad = 0;
         for(Edge e : p.edges){
 
+            if(e.compareTo(a.start) == 0){
+                return true;
+            }
+            if(e.compareTo(a.end) == 0){
+                return true;
+            }
 
         }
-
+/*
         if(edgeNotCrossEdge(temp1,a)){
             return true;
         }
-        if(edgeNotCrossEdge(temp2,a)){
+        if(!edgeNotCrossEdge(temp2,a)){
             return true;
         }
-
-
-        if(temp1.compareTo(a.start)== 0 || temp1.compareTo(a.end)== 0){
+*/
+        /*if(temp1.compareTo(a.end)> 0 || temp2.compareTo(a.end)> 0){
             return true;
-        }
-        if(temp2.compareTo(a.start)== 0 || temp2.compareTo(a.end)== 0){
+        }*/
+        /*
+        if(temp2.compareTo(a.start)< 0 || temp2.compareTo(a.end)< 0){
             return true;
-        }
+        }*/
 
 
         /*
@@ -64,16 +67,29 @@ public class Polygon {
 
     public static boolean edgeNotCrossEdge(Edge a, Edge b){
 
-        if(((isPointOnLine(a, b.start) && !isPointOnLine(a, b.end)) )){
+        /*if(a.compareTo(b.start) == 0 && a.compareTo(b.end) != 0 || a.compareTo(b.end) == 0 && a.compareTo(b.start) != 0){
             return true;
         }
 
+        if(a.compareTo(b.start) > 0 && a.compareTo(b.end) > 0 && !(a.compareTo(b.start) < 0 && a.compareTo(b.end) <0 )){
+            return true;
+        }
 
+        if(a.compareTo(b.start) < 0 && a.compareTo(b.end) < 0 && !(a.compareTo(b.start) > 0 && a.compareTo(b.end) >0 )){
+            return true;
+        }*/
+
+        //Höger sida om
+        if(b.compareTo(a.start) > 0 && b.compareTo(a.end) > 0){
+            return true;
+        }
+
+        /*
 
         if(a.compareTo(b.start) > 0 && a.compareTo(b.end) > 0 || b.compareTo(a.start) > 0 && b.compareTo(a.end) > 0 ||
         a.compareTo(b.start) < 0 && a.compareTo(b.end) < 0 || b.compareTo(a.start) < 0 && b.compareTo(b.end) < 0){
             return true;
-        }
+        }*/
 
         return false;
     }
