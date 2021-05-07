@@ -17,7 +17,7 @@ public class Area extends JPanel {
 
     public Area(){
         try {
-            SC = new StringCutter("area1.txt");
+            SC = new StringCutter("area2.txt");
             generateUsablePoints();
             generateUsableEdges();
         } catch (FileNotFoundException e) {
@@ -31,13 +31,11 @@ public class Area extends JPanel {
         for(Polygon pol : Graph.ap){
             Graph.points.addAll(Arrays.asList(pol.getCorners()));
         }
-        for(Polygon poly : Graph.ap){
+        /*for(Polygon poly : Graph.ap){
             Graph.points.removeIf(p -> Polygon.isInPoly(poly, p));
-        }
+        }*/
         this.repaint();
     }
-
-
 
     public void generateUsableEdges(){
         ArrayList<Edge> edges = new ArrayList<>();
@@ -57,15 +55,19 @@ public class Area extends JPanel {
 
 
         for(Edge e : edges){
-            for(Polygon poly : Graph.ap){
-                if(!Graph.a.contains(e)){
-                    if(!Polygon.edgeCrossesPoly(poly,e)){
-                        Graph.a.add(e);
-                    }
-                }
+            if(!Graph.a.contains(e)){
+                Graph.a.add(e);
             }
         }
 
+
+        for(Edge e : edges){
+            for(Polygon poly : Graph.ap){
+                if(Polygon.edgeCrossesPoly(poly,e)){
+                    Graph.a.remove(e);
+                }
+            }
+        }
 
         this.repaint();
     }
@@ -129,7 +131,9 @@ public class Area extends JPanel {
         g2d.setColor(Color.BLACK);
         g2d.scale(0.72,0.72);
         g2d.rotate(-(Math.PI/2),520,520);
-        for(Polygon a : MapCreator.polys){
+
+
+        for(Polygon a : Graph.ap){
             g2d.fillPolygon(a.yarray,a.xarray,8);
         }
 
@@ -150,9 +154,10 @@ public class Area extends JPanel {
         }*/
 
 
+        /*
         for(Point p : Graph.points){
             g2d.fillOval((int)p.getY()-5,(int)p.getX()-5,10,10);
-        }
+        }*/
 
 
         g2d.setColor(Color.BLUE);

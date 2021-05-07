@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class MapCreator {
 
-    public static ArrayList<Polygon> polys = new ArrayList<>();
+    //public static ArrayList<Polygon> polys = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
 
@@ -41,7 +41,7 @@ public class MapCreator {
         StdDraw.setXscale(0,1000);
         StdDraw.setYscale(0,1000);*/
 
-        Graph g = new Graph(polys.size()*4);
+        Graph g = new Graph(Graph.ap.size()*4);
 
         /*
         //Drawing part which draws the StdDraw stuff

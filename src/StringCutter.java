@@ -69,8 +69,8 @@ public class StringCutter {
                 length = (int)Double.parseDouble(dat[4]);
 
                 //Vi använder din loop och går igenom en kant i taget efter loopen bygger vi polygonen innan vi går till nästa polygon
-                Point startpoint = new Point(xPoints[i],yPoints[i]);
-                Point endpoint = new Point(xPoints[i+1],yPoints[i+1]);
+                Point startpoint = new Point(Double.parseDouble(dat[0]),Double.parseDouble(dat[1]));
+                Point endpoint = new Point(Double.parseDouble(dat[2]),Double.parseDouble(dat[3]));
 
                 edges[i] = new Edge(startpoint,endpoint,length,idEdge);
                 /*switch (i) {
@@ -86,7 +86,7 @@ public class StringCutter {
             //vi behöver skapa 4 edges för varje polygon, denna loopen ^ skapar en
             //Vi behöver skapa en array med polygoner som vi kan spara de i
             Polygon polygon = new Polygon(edges,xPoints,yPoints,8,id);
-            MapCreator.polys.add(polygon);
+            //MapCreator.polys.add(polygon);
             //Graph.a.addAll(Arrays.asList(polygon.edges));
             Graph.ap.add(polygon);
         }
