@@ -35,10 +35,10 @@ public class Edge implements Comparable<Point>{
 
 
         double compare = (dx1*dy2 - dy1*dx2);
-        if(compare>0){//Större än noll så är den inuti
+        if(compare>0){//Större än noll så är den inuti, vänster sida om edgen
             return 1;
         }
-        else if(compare <0){//Mindre än noll så är den utanför
+        else if(compare <0){//Mindre än noll så är den utanför, höger sida om edgen
             return -1;
         }
         return 0;

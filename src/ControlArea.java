@@ -30,7 +30,22 @@ public class ControlArea extends JPanel {
             if(result != null && result.length() > 0){
                 try{
                     //Lägga till boundary som man inte få gå utanför
-                    Area.start = new Point(Double.parseDouble(result.split(",")[0]),Double.parseDouble(result.split(",")[1]));
+                    Point temp = Area.start;
+                    Point newP = new Point(Double.parseDouble(result.split(",")[0]),Double.parseDouble(result.split(",")[1]));
+                    int a = 0;
+                    for(Polygon poly : Graph.ap){
+                        if(Polygon.isInPoly(poly,newP)){
+                            JOptionPane.showConfirmDialog(jp, "Point is on a building! Choose a new point","Error: isn't a valid point", JOptionPane.PLAIN_MESSAGE);
+                            a++;
+                            break;
+                        }
+                    }
+                    if(a==0){
+                        Area.start = newP;
+                    }
+                    else{
+                        Area.start = temp;
+                    }
                     jp.repaint();
                 }
                 catch (Exception s){
@@ -51,7 +66,23 @@ public class ControlArea extends JPanel {
             );
             if(result != null && result.length() > 0){
                 try{
-                    Area.end = new Point(Double.parseDouble(result.split(",")[0]),Double.parseDouble(result.split(",")[1]));
+                    Point temp = Area.start;
+                    Point newP = new Point(Double.parseDouble(result.split(",")[0]),Double.parseDouble(result.split(",")[1]));
+                    int a = 0;
+                    for(Polygon poly : Graph.ap){
+                        if(Polygon.isInPoly(poly,newP)){
+                            JOptionPane.showConfirmDialog(jp, "Point is on a building! Choose a new point","Error: isn't a valid point", JOptionPane.PLAIN_MESSAGE);
+                            a++;
+                            break;
+                        }
+                    }
+                    if(a==0){
+                        Area.end = newP;
+                    }
+                    else{
+                        Area.end = temp;
+                    }
+
                     jp.repaint();
                 }
                 catch (Exception s){

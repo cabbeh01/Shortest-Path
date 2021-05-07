@@ -7,7 +7,6 @@ public class Polygon {
     int npoint;
 
     int id;
-    Edge bottom, right, top, left;
 
     Edge[] edges;
 
@@ -22,22 +21,33 @@ public class Polygon {
     }
 
     public static boolean edgeCrossesPoly(Polygon p ,Edge a){
-        Edge temp1 = new Edge(p.edges[1].start,p.edges[3].start,0,0);
-        Edge temp2 = new Edge(p.edges[0].start,p.edges[2].start,0,0);
+        Edge temp1 = new Edge(p.edges[0].start,p.edges[2].start,0,0);
+        Edge temp2 = new Edge(p.edges[3].start,p.edges[1].start,0,0);
 
+        int ad = 0;
         for(Edge e : p.edges){
-            if(!edgeNotCrossEdge(e,a)){
-                return true;
-            }
+
+
         }
 
-        if(a.start == temp1.start && a.end == temp1.end || a.start == temp1.end && a.end == temp1.start){
+        if(edgeNotCrossEdge(temp1,a)){
             return true;
         }
-        else if(a.start == temp2.start && a.end == temp2.end || a.start == temp2.end && a.end == temp2.start){
+        if(edgeNotCrossEdge(temp2,a)){
             return true;
         }
-        /*for(int i = 0; i<p.edges.length; i++){
+
+
+        if(temp1.compareTo(a.start)== 0 || temp1.compareTo(a.end)== 0){
+            return true;
+        }
+        if(temp2.compareTo(a.start)== 0 || temp2.compareTo(a.end)== 0){
+            return true;
+        }
+
+
+        /*
+        for(int i = 0; i<p.edges.length; i++){
             if((p.edges[i].start == a.start && p.edges[i].end == a.end )){
                 return true;
             }
@@ -45,31 +55,27 @@ public class Polygon {
 
         return false;
     }
-    private final static double EPSILON = 0.0000001;
+
     public static boolean isPointOnLine(Edge a, Point b) {
-        // Move the image, so that a.first is on (0|0)
-        Edge aTmp = new Edge(new Point(0, 0), new Point(
-                a.end.x - a.start.x, a.end.y - a.start.y),0,0);
-        Point bTmp = new Point(b.x - a.start.x, b.y - a.start.y);
-        double r = a.compareTo(bTmp);
-        return Math.abs(r) > EPSILON;
+        return a.compareTo(b) == 0;
     }
 
 
 
     public static boolean edgeNotCrossEdge(Edge a, Edge b){
 
-        if(isPointOnLine(a, b.start) || isPointOnLine(a, b.end)){
+        if(((isPointOnLine(a, b.start) && !isPointOnLine(a, b.end)) )){
             return true;
         }
-        else
 
-            if(a.compareTo(b.start) > 0 && a.compareTo(b.end) > 0 ||
-                a.compareTo(b.start) < 0 && a.compareTo(b.end) < 0){
-            return false;
+
+
+        if(a.compareTo(b.start) > 0 && a.compareTo(b.end) > 0 || b.compareTo(a.start) > 0 && b.compareTo(a.end) > 0 ||
+        a.compareTo(b.start) < 0 && a.compareTo(b.end) < 0 || b.compareTo(a.start) < 0 && b.compareTo(b.end) < 0){
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public static boolean isInPoly(Polygon pol,Point p){
@@ -130,16 +136,5 @@ public class Polygon {
         points[3] = this.getBottom().start;
         return points;
     }
-
-
-    public int[] getX() {
-        return xarray;
-    }
-
-    public int[] getY() {
-        return yarray;
-    }
-
-    public int getNpoint() {return npoint; }
 
 }

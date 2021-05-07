@@ -1,3 +1,4 @@
+import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -39,7 +40,7 @@ public class Area extends JPanel {
 
     public void generateUsableEdges(){
 
-        Graph.a.clear();
+
         ArrayList<Edge> edges = new ArrayList<>();
         ArrayList<Edge> edges2 = new ArrayList<>();
         int id = 0;
@@ -51,10 +52,16 @@ public class Area extends JPanel {
             }
         }
 
+
+        System.out.println("Antalet punkter: " + Graph.points.size());
+        Graph.a.clear();
+        System.out.println("Antalet Polygoner: " + Graph.ap.size());
         for(Polygon poly : Graph.ap){
             for(Edge e : edges){
-                if(Polygon.edgeCrossesPoly(poly,e)){
-                    Graph.a.add(e);
+                if(!Graph.a.contains(e)){
+                    if(!Polygon.edgeCrossesPoly(poly,e)){
+                        Graph.a.add(e);
+                    }
                 }
             }
         }
@@ -151,6 +158,7 @@ public class Area extends JPanel {
             g2d.drawLine((int)e1.start.getY(),(int)e1.start.getX(),(int)e1.end.getY(),(int)e1.end.getX());
         }
 
+        System.out.println("Antalet edges: " + Graph.a.size());
 
         /*int s = r.nextInt() * 5;
         if(s>2.5){

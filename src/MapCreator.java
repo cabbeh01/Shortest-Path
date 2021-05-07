@@ -37,12 +37,13 @@ public class MapCreator {
         //System.out.println(map);
 
         //*StdDraw.line(442,377,599,377);
-
+/*
         StdDraw.setXscale(0,1000);
-        StdDraw.setYscale(0,1000);
+        StdDraw.setYscale(0,1000);*/
 
         Graph g = new Graph(polys.size()*4);
 
+        /*
         //Drawing part which draws the StdDraw stuff
         for(Polygon p : Graph.ap){
 
@@ -72,7 +73,7 @@ public class MapCreator {
             StdDraw.setPenRadius(rad);
             StdDraw.setPenColor(Color.BLACK);
         }
-
+*/
 /*
 
         for(Edge c : Graph.a){
