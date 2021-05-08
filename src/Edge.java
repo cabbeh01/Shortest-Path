@@ -43,5 +43,12 @@ public class Edge implements Comparable<Point>{
         }
         return 0;
     }
+
+    public Edge inverse(){
+        Point t = start;
+        start = end;
+        end = t;
+        return this;
+    }
 }
 

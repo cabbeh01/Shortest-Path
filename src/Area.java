@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Area extends JPanel {
@@ -17,7 +18,7 @@ public class Area extends JPanel {
 
     public Area(){
         try {
-            SC = new StringCutter("area2.txt");
+            SC = new StringCutter("area3.txt");
             generateUsablePoints();
             generateUsableEdges();
         } catch (FileNotFoundException e) {
@@ -31,42 +32,44 @@ public class Area extends JPanel {
         for(Polygon pol : Graph.ap){
             Graph.points.addAll(Arrays.asList(pol.getCorners()));
         }
-        /*for(Polygon poly : Graph.ap){
+        for(Polygon poly : Graph.ap){
             Graph.points.removeIf(p -> Polygon.isInPoly(poly, p));
-        }*/
-        this.repaint();
+        }
+        //this.repaint();
     }
 
     public void generateUsableEdges(){
-        ArrayList<Edge> edges = new ArrayList<>();
+       // ArrayList<Edge> edges = new ArrayList<>();
         //ArrayList<Edge> edges2 = new ArrayList<>();
         int id = 0;
+        for(int i = 0; i< Graph.points.size(); i++){
+            for(int j = i+1; j< Graph.points.size(); j++){
+
+                if(i != j){
+                    Graph.a.add(new Edge(Graph.points.get(i),Graph.points.get(j),0,id++));
+                }
+
+            }
+        }
+/*
         for(Point a : Graph.points){
             for(Point b: Graph.points){
                 if(!a.equals(b)){
                     edges.add(new Edge(a,b,0,id++));
+
                 }
             }
-        }
+        }*/
 
         System.out.println("Antalet punkter: " + Graph.points.size());
-        Graph.a.clear();
+        //Graph.a.clear();
         System.out.println("Antalet Polygoner: " + Graph.ap.size());
 
 
-        for(Edge e : edges){
-            if(!Graph.a.contains(e)){
-                Graph.a.add(e);
-            }
-        }
+        //Graph.a.addAll(edges);
 
-
-        for(Edge e : edges){
-            for(Polygon poly : Graph.ap){
-                if(Polygon.edgeCrossesPoly(poly,e)){
-                    Graph.a.remove(e);
-                }
-            }
+        for(Polygon poly : Graph.ap){
+            Graph.a.removeIf(e -> Polygon.edgeCrossesPoly(poly, e));
         }
 
         this.repaint();
@@ -126,7 +129,7 @@ public class Area extends JPanel {
         this.setBackground(Color.WHITE);
 
         //Enabling antialias to get a smoother experience
-        //g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setColor(Color.BLACK);
         g2d.scale(0.72,0.72);
@@ -154,14 +157,26 @@ public class Area extends JPanel {
         }*/
 
 
-        /*
+
         for(Point p : Graph.points){
             g2d.fillOval((int)p.getY()-5,(int)p.getX()-5,10,10);
-        }*/
+        }
 
 
-        g2d.setColor(Color.BLUE);
+
+        //g2d.setColor(Color.BLUE);
+
+
         for(Edge e1 : Graph.a){
+            int s = r.nextInt(4);
+            if(s == 1){
+                g2d.setColor(Color.GREEN);
+            }
+            else if(s == 2){
+                g2d.setColor(Color.BLUE);
+            }else if(s == 3){
+                g2d.setColor(Color.ORANGE);
+            }
             g2d.drawLine((int)e1.start.getY(),(int)e1.start.getX(),(int)e1.end.getY(),(int)e1.end.getX());
         }
 
