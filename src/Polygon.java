@@ -37,25 +37,23 @@ public class Polygon {
 
         int count = 0;
         for(Edge e : p.edges){
-
             if(Polygon.edgeNotCrossEdge(e,a)){
                 count++;
             }
         }
+/*
         if(Polygon.isInPoly(p,a.start)){
             return true;
         }
         if(Polygon.isInPoly(p,a.end)){
             return true;
-        }
+        }*/
 
 
         //System.out.println(count);
 
         //System.out.println(count);
-        if(count == 4){
-            return false;
-        }
+        return count != 4;
 
 
 
@@ -77,8 +75,6 @@ public class Polygon {
                 return true;
             }
         }*/
-
-        return true;
     }
 
     public static boolean isPointOnLine(Edge a, Point b) {
@@ -97,13 +93,10 @@ public class Polygon {
             return true;
         }
 
-        if(a.compareTo(b.start) == 0){
+        if(a.compareTo(b.start) == 0 || a.compareTo(b.end) == 0 ){
             return true;
         }
 
-        if(a.compareTo(b.end) == 0){
-            return true;
-        }
         /*
         if(a.compareTo(b.start) == 0 && a.compareTo(b.end) != 0 || a.compareTo(b.end) == 0 && a.compareTo(b.start) != 0){
             return true;
@@ -121,20 +114,9 @@ public class Polygon {
         if(b.compareTo(a.start) > 0 && b.compareTo(a.end) > 0 || a.compareTo(b.start) > 0 && a.compareTo(b.end) > 0){
             return true;
         }
-        if(b.compareTo(a.start) < 0 && b.compareTo(a.end) < 0 || a.compareTo(b.start) < 0 && a.compareTo(b.end) < 0){
-            return true;
-        }
+        //Vänster sida om
+        return b.compareTo(a.start) < 0 && b.compareTo(a.end) < 0 || a.compareTo(b.start) < 0 && a.compareTo(b.end) < 0;
 
-
-
-
-/*
-        if(a.compareTo(b.start) > 0 && a.compareTo(b.end) > 0 || b.compareTo(a.start) > 0 && b.compareTo(a.end) > 0 ||
-        a.compareTo(b.start) < 0 && a.compareTo(b.end) < 0 || b.compareTo(a.start) < 0 && b.compareTo(b.end) < 0){
-            return true;
-        }*/
-
-        return false;
     }
 
     public static boolean isInPoly(Polygon pol,Point p){

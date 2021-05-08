@@ -1,7 +1,5 @@
-import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class StringCutter {
@@ -29,9 +27,6 @@ public class StringCutter {
             boundary[i-1] = (int)Double.parseDouble(boundArr[i]);
         }
 
-        //System.out.println("("+boundary[0] +","+boundary[1]+")");
-        //System.out.println("("+boundary[2] +","+boundary[3]+")");
-
         //Kvar att fixa är att göra om bindarys till en tvådim array. För tillfälligt ligger
         //Värdena i en array
 
@@ -44,19 +39,13 @@ public class StringCutter {
             int id = Integer.parseInt(inp.nextLine().replaceAll("Polygon: ",""));
             inp.nextLine();
             int i = 0;
-            int length = 0;
+            int length;
 
             int[] xPoints = new int[8];
             int[] yPoints = new int[8];
 
-            Point temppoint = new Point(0,0);
-
             Edge[] edges = new Edge[4];
-           // Edge tempEdge;
-            //Edge topedge = new Edge(temppoint,temppoint,0);
-            //Edge rightedge = new Edge(temppoint,temppoint,0);
-            //Edge bottomedge = new Edge(temppoint,temppoint,0);
-            //Edge leftedge = new Edge(temppoint,temppoint,0);
+
             while(i<4) {
 
                 //Filtrerar ner data till endast värden
@@ -73,12 +62,7 @@ public class StringCutter {
                 Point endpoint = new Point(Double.parseDouble(dat[2]),Double.parseDouble(dat[3]));
 
                 edges[i] = new Edge(startpoint,endpoint,length,idEdge);
-                /*switch (i) {
-                    case 0 -> bottomedge = tempEdge;
-                    case 1 -> rightedge = tempEdge;
-                    case 2 -> topedge = tempEdge;
-                    case 3 -> leftedge = tempEdge;
-                }*/
+
                 i++;
                 idEdge++;
             }
@@ -88,7 +72,7 @@ public class StringCutter {
             Polygon polygon = new Polygon(edges,xPoints,yPoints,8,id);
             //MapCreator.polys.add(polygon);
             //Graph.a.addAll(Arrays.asList(polygon.edges));
-            Graph.ap.add(polygon);
+            Graph.polygons.add(polygon);
         }
     }
 }

@@ -3,21 +3,12 @@ public class Edge implements Comparable<Point>{
     Point end;
     double length;
     int id;
-    //Object direction;
 
     public Edge(Point start, Point end,double length,int id){
         this.start = start;
         this.end = end;
         this.length = length;
         this.id = id;
-    }
-
-    public Point getStart() {
-        return start;
-    }
-
-    public Point getEnd() {
-        return end;
     }
 
     public double getLength() {
@@ -42,13 +33,6 @@ public class Edge implements Comparable<Point>{
             return -1;
         }
         return 0;
-    }
-
-    public Edge inverse(){
-        Point t = start;
-        start = end;
-        end = t;
-        return this;
     }
 }
 

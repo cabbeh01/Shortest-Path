@@ -1,8 +1,6 @@
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ControlArea extends JPanel {
 
@@ -33,7 +31,7 @@ public class ControlArea extends JPanel {
                     Point temp = Area.start;
                     Point newP = new Point(Double.parseDouble(result.split(",")[0]),Double.parseDouble(result.split(",")[1]));
                     int a = 0;
-                    for(Polygon poly : Graph.ap){
+                    for(Polygon poly : Graph.polygons){
                         if(Polygon.isInPoly(poly,newP)){
                             JOptionPane.showConfirmDialog(jp, "Point is on a building! Choose a new point","Error: isn't a valid point", JOptionPane.PLAIN_MESSAGE);
                             a++;
@@ -70,7 +68,7 @@ public class ControlArea extends JPanel {
                     Point temp = Area.start;
                     Point newP = new Point(Double.parseDouble(result.split(",")[0]),Double.parseDouble(result.split(",")[1]));
                     int a = 0;
-                    for(Polygon poly : Graph.ap){
+                    for(Polygon poly : Graph.polygons){
                         if(Polygon.isInPoly(poly,newP)){
                             JOptionPane.showConfirmDialog(jp, "Point is on a building! Choose a new point","Error: isn't a valid point", JOptionPane.PLAIN_MESSAGE);
                             a++;
@@ -110,7 +108,6 @@ public class ControlArea extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-
     }
 }
 

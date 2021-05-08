@@ -1,16 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 public class Area extends JPanel {
     //Creating random object
     Random r = new Random();
 
     StringCutter SC;
+    Graph g;
 
     //Points for the start and end-point
     static Point start = new Point(50,50);
@@ -18,15 +16,30 @@ public class Area extends JPanel {
 
     public Area(){
         try {
-            SC = new StringCutter("area1.txt");
+            SC = new StringCutter("area4.txt");
             generateUsablePoints();
             generateUsableEdges();
             this.repaint();
+            g = new Graph(Graph.a.size());
+            //addtoGraph();
+            //g.DFS(0);
+            System.out.println(Arrays.toString(g.visiting.toArray()));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+    public void addtoGraph(){
+
+        for(int i = 0; i<Graph.a.size(); i++){
+            for(int j = i+1;j<Graph.a.size(); j++ ){
+                if(i!=j){
+                    g.addEdge(i,j);
+                }
+            }
+        }
+
+    }
     public static void resetNodes(){
         Graph.points.clear();
         Graph.a.clear();
@@ -36,42 +49,38 @@ public class Area extends JPanel {
     //Denna metod gör att vi hittar hörnpunkterna på byggnaderna utifrån de
     //koordinater som vi har
     public static void generateUsablePoints(){
-        Graph.points.add(start);
-        Graph.points.add(end);
-        for(Polygon pol : Graph.ap){
+        //Graph.points.add(start);
+        //Graph.points.add(end);
+        for(Polygon pol : Graph.polygons){
             Graph.points.addAll(Arrays.asList(pol.getCorners()));
         }
-        for(Polygon poly : Graph.ap){
+
+        for(Polygon poly : Graph.polygons){
             Graph.points.removeIf(p -> Polygon.isInPoly(poly, p));
         }
+
     }
 
     public static void generateUsableEdges(){
-        int id = 0;
         for(int i = 0; i< Graph.points.size(); i++){
             for(int j = i+1; j< Graph.points.size(); j++){
                 if(i != j){
-                    Graph.a.add(new Edge(Graph.points.get(i),Graph.points.get(j),0,id++));
+                    Graph.a.add(new Edge(Graph.points.get(i),Graph.points.get(j),0,i));
                 }
             }
         }
-/*
-        for(Point a : Graph.points){
-            for(Point b: Graph.points){
-                if(!a.equals(b)){
-                    edges.add(new Edge(a,b,0,id++));
 
-                }
-            }
-        }*/
 
         System.out.println("Antalet punkter: " + Graph.points.size());
-        System.out.println("Antalet Polygoner: " + Graph.ap.size());
+        System.out.println("Antalet Polygoner: " + Graph.polygons.size());
 
-        for(Polygon poly : Graph.ap){
+        for(Polygon poly : Graph.polygons){
             Graph.a.removeIf(e -> Polygon.edgeCrossesPoly(poly, e));
         }
+
+        System.out.println("Antalet edges: " + Graph.a.size());
     }
+
     /*
     //Variable to see if the game is paused
     public boolean paused = false;
@@ -128,22 +137,23 @@ public class Area extends JPanel {
         this.setBackground(Color.WHITE);
 
         //Enabling antialias to get a smoother experience
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        //g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setColor(Color.BLACK);
         g2d.scale(0.72,0.72);
         g2d.rotate(-(Math.PI/2),520,520);
 
 
-        for(Polygon a : Graph.ap){
+        for(Polygon a : Graph.polygons){
             g2d.fillPolygon(a.yarray,a.xarray,8);
         }
 
 
 
         g2d.setColor(Color.MAGENTA);
-        for(Point p : Graph.points){
-            g2d.fillOval((int)p.getY()-5,(int)p.getX()-5,10,10);
+
+        for(int i = 0; i<Graph.points.size(); i++){
+            g2d.fillOval((int)Graph.points.get(i).getY()-5,(int)Graph.points.get(i).getX()-5,10,10);
         }
 
         g2d.setColor(Color.RED);
@@ -152,11 +162,22 @@ public class Area extends JPanel {
         g2d.fillOval((int)end.y-10,(int)end.x-10,20,20);
 
         g2d.setColor(Color.BLUE);
-        for(Edge e1 : Graph.a){
+        /*for(Edge e1 : Graph.a){
             g2d.drawLine((int)e1.start.getY(),(int)e1.start.getX(),(int)e1.end.getY(),(int)e1.end.getX());
+        }*/
+
+        for(int i = 0; i<Graph.a.size(); i++){
+            if(Graph.visiting.contains(i)){
+                g2d.setColor(Color.GREEN);
+            }
+            else
+                g2d.setColor(Color.white);
+
+            g2d.drawLine((int)Graph.a.get(i).start.getY(),(int)Graph.a.get(i).start.getX(),(int)Graph.a.get(i).end.getY(),(int)Graph.a.get(i).end.getX());
+            //g2d.fillOval((int)Graph.points.get(i).getY()-5,(int)Graph.points.get(i).getX()-5,10,10);
         }
 
-        System.out.println("Antalet edges: " + Graph.a.size());
+
 
         /*int s = r.nextInt() * 5;
         if(s>2.5){

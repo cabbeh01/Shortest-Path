@@ -2,12 +2,13 @@ import java.util.*;
 
 //DFS Technique for undirected graph
 class Graph {
-    private int Vertices;   // No. of vertices 
+    private int Vertices;
 
     static ArrayList<Edge> a = new ArrayList<>();
-    static ArrayList<Polygon> ap = new ArrayList<>();
+    static ArrayList<Polygon> polygons = new ArrayList<>();
     static ArrayList<Point> points = new ArrayList<>();
-    ArrayList<Integer> visiting = new ArrayList<>();
+
+    static ArrayList<Integer> visiting = new ArrayList<>();
     PriorityQueue<Integer> bfList = new PriorityQueue<>();
     // adjacency list declaration
     private LinkedList<Integer> adj_list[];
@@ -18,9 +19,11 @@ class Graph {
         adj_list = new LinkedList[v];
         for (int i=0; i<v; ++i)
             adj_list[i] = new LinkedList();
+
     }
 
-    //add an edge to the graph 
+    //add an edge to the graph
+    //vertex and node
     void addEdge(int v, int w) {
         adj_list[v].add(w);  // Add w to v's list. 
     }
@@ -31,7 +34,7 @@ class Graph {
     void DFS_helper(int v,boolean visited[]) {
         // current node is visited 
         visited[v] = true;
-        //System.out.print(v+" ");
+        System.out.print(v+" ");
         visiting.add(v);
 
         // process all adjacent vertices 
@@ -41,6 +44,7 @@ class Graph {
             int n = i.next();
             if (!visited[n])
                 DFS_helper(n, visited);
+
         }
     }
 
