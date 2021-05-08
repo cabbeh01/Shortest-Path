@@ -21,7 +21,7 @@ public class ControlArea extends JPanel {
             String result = (String)JOptionPane.showInputDialog(
                     jp,
                     "Enter the coordinate for the startpoint, in format (x,y)",
-                    "Endpoint",
+                    "Startpoint",
                     JOptionPane.PLAIN_MESSAGE,
                     null,
                     null,
@@ -42,6 +42,7 @@ public class ControlArea extends JPanel {
                     }
                     if(a==0){
                         Area.start = newP;
+                        Area.resetNodes();
                     }
                     else{
                         Area.start = temp;
@@ -78,6 +79,7 @@ public class ControlArea extends JPanel {
                     }
                     if(a==0){
                         Area.end = newP;
+                        Area.resetNodes();
                     }
                     else{
                         Area.end = temp;

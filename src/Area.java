@@ -18,37 +18,41 @@ public class Area extends JPanel {
 
     public Area(){
         try {
-            SC = new StringCutter("area3.txt");
+            SC = new StringCutter("area1.txt");
             generateUsablePoints();
             generateUsableEdges();
+            this.repaint();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+    public static void resetNodes(){
+        Graph.points.clear();
+        Graph.a.clear();
+        generateUsablePoints();
+        generateUsableEdges();
+    }
     //Denna metod gör att vi hittar hörnpunkterna på byggnaderna utifrån de
     //koordinater som vi har
-    public void generateUsablePoints(){
+    public static void generateUsablePoints(){
+        Graph.points.add(start);
+        Graph.points.add(end);
         for(Polygon pol : Graph.ap){
             Graph.points.addAll(Arrays.asList(pol.getCorners()));
         }
         for(Polygon poly : Graph.ap){
             Graph.points.removeIf(p -> Polygon.isInPoly(poly, p));
         }
-        //this.repaint();
     }
 
-    public void generateUsableEdges(){
-       // ArrayList<Edge> edges = new ArrayList<>();
-        //ArrayList<Edge> edges2 = new ArrayList<>();
+    public static void generateUsableEdges(){
         int id = 0;
         for(int i = 0; i< Graph.points.size(); i++){
             for(int j = i+1; j< Graph.points.size(); j++){
-
                 if(i != j){
                     Graph.a.add(new Edge(Graph.points.get(i),Graph.points.get(j),0,id++));
                 }
-
             }
         }
 /*
@@ -62,17 +66,11 @@ public class Area extends JPanel {
         }*/
 
         System.out.println("Antalet punkter: " + Graph.points.size());
-        //Graph.a.clear();
         System.out.println("Antalet Polygoner: " + Graph.ap.size());
-
-
-        //Graph.a.addAll(edges);
 
         for(Polygon poly : Graph.ap){
             Graph.a.removeIf(e -> Polygon.edgeCrossesPoly(poly, e));
         }
-
-        this.repaint();
     }
     /*
     //Variable to see if the game is paused
@@ -124,6 +122,7 @@ public class Area extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
+
         Graphics2D g2d = (Graphics2D)g;
 
         this.setBackground(Color.WHITE);
@@ -140,43 +139,20 @@ public class Area extends JPanel {
             g2d.fillPolygon(a.yarray,a.xarray,8);
         }
 
-        g2d.setColor(Color.RED);
-        g2d.fillOval((int)start.x,(int)start.y,20,20);
-        g2d.setColor(Color.GREEN);
-        g2d.fillOval((int)end.x,(int)end.y,20,20);
-
 
 
         g2d.setColor(Color.MAGENTA);
-
-        /*
-        for(Polygon p : Graph.ap){
-            for(int i = 0; i< p.getCorners().length; i++){
-                g2d.fillOval(p.getY()[i]-5,p.getX()[i]-5,10,10);
-            }
-        }*/
-
-
-
         for(Point p : Graph.points){
             g2d.fillOval((int)p.getY()-5,(int)p.getX()-5,10,10);
         }
 
+        g2d.setColor(Color.RED);
+        g2d.fillOval((int)start.y-10,(int)start.x-10,20,20);
+        g2d.setColor(Color.GREEN);
+        g2d.fillOval((int)end.y-10,(int)end.x-10,20,20);
 
-
-        //g2d.setColor(Color.BLUE);
-
-
+        g2d.setColor(Color.BLUE);
         for(Edge e1 : Graph.a){
-            int s = r.nextInt(4);
-            if(s == 1){
-                g2d.setColor(Color.GREEN);
-            }
-            else if(s == 2){
-                g2d.setColor(Color.BLUE);
-            }else if(s == 3){
-                g2d.setColor(Color.ORANGE);
-            }
             g2d.drawLine((int)e1.start.getY(),(int)e1.start.getX(),(int)e1.end.getY(),(int)e1.end.getX());
         }
 
