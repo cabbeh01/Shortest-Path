@@ -1,3 +1,4 @@
+import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -23,7 +24,9 @@ public class Area extends JPanel {
             //g = new Graph(Graph.a.size()*4);
             //addtoGraph();
             //g.DFS(0);
-            System.out.println(Arrays.toString(g.visiting.toArray()));
+           // System.out.println(Arrays.toString(g.visiting.toArray()));
+            //Graph.aStar(start,end);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -34,7 +37,7 @@ public class Area extends JPanel {
         for(int i = 0; i<Graph.a.size(); i++){
             for(int j = i+1;j<Graph.a.size(); j++ ){
                 if(i!=j){
-                    g.addEdge(i,j);
+                    //g.addEdge(i,j);
                 }
             }
         }
@@ -65,7 +68,15 @@ public class Area extends JPanel {
         for(int i = 0; i< Graph.points.size(); i++){
             for(int j = i+1; j< Graph.points.size(); j++){
                 if(i != j){
-                    Graph.a.add(new Edge(Graph.points.get(i),Graph.points.get(j),0,i));
+
+                    //Räknarutlängden för varje ritad kant
+                    double distance = Math.sqrt(Math.pow(Graph.points.get(i).x-Graph.points.get(j).x,2)+Math.pow(Graph.points.get(i).y-Graph.points.get(j).y,2));
+                    Edge newedge =new Edge(Graph.points.get(i),Graph.points.get(j),distance,i);
+                    //Graph.points.get(i).addneighbours(Graph.points.get(j));
+                    //Graph.points.get(j).addneighbours(Graph.points.get(i));
+                    Graph.points.get(i).addBranch(distance,Graph.points.get(j));
+                    Graph.points.get(j).addBranch(distance,Graph.points.get(i));
+                    Graph.a.add(newedge);
                 }
             }
         }
@@ -79,6 +90,7 @@ public class Area extends JPanel {
         }
 
         System.out.println("Antalet edges: " + Graph.a.size());
+        System.out.println(Graph.a.get(40).length + " px");
     }
 
 
@@ -108,12 +120,27 @@ public class Area extends JPanel {
 
 
 
+        //Drawing points
+        g2d.setColor(Color.GREEN);
+
+        g2d.fillOval((int)Graph.points.get(0).getY()-5,(int)Graph.points.get(0).getX()-5,10,10);
+        g2d.fillOval((int)Graph.points.get(1).getY()-5,(int)Graph.points.get(1).getX()-5,10,10);
+
+
         g2d.setColor(Color.MAGENTA);
-/*
+
+
+
+        /*for(Point p2 : Graph.points.get(0).getNeighbours()){
+            g2d.fillOval((int)p2.getY()-5,(int)p2.getX()-5,10,10);
+        }*/
+
+        /*
+        g2d.setColor(Color.MAGENTA);
         for(int i = 0; i<Graph.points.size(); i++){
             g2d.fillOval((int)Graph.points.get(i).getY()-5,(int)Graph.points.get(i).getX()-5,10,10);
-        }
-*/
+        }*/
+
 
 
         g2d.setColor(Color.BLUE);
@@ -121,23 +148,25 @@ public class Area extends JPanel {
             g2d.drawLine((int)e1.start.getY(),(int)e1.start.getX(),(int)e1.end.getY(),(int)e1.end.getX());
         }*/
 
-        for(int i = 0; i<Graph.a.size(); i++){
-            if(Graph.visiting.contains(i)){
+
+        for(int i = 0; i<Graph.a.size(); i++){ //DEBUGA KANTER
+
+            if(i == 40){
                 g2d.setColor(Color.GREEN);
             }
             else
                 g2d.setColor(Color.BLUE);
 
+
             g2d.drawLine((int)Graph.a.get(i).start.getY(),(int)Graph.a.get(i).start.getX(),(int)Graph.a.get(i).end.getY(),(int)Graph.a.get(i).end.getX());
             //g2d.fillOval((int)Graph.points.get(i).getY()-5,(int)Graph.points.get(i).getX()-5,10,10);
         }
 
-        g2d.setColor(Color.RED);
-        g2d.fillOval((int)start.y-10,(int)start.x-10,20,20);
-        g2d.setColor(Color.GREEN);
-        g2d.fillOval((int)end.y-10,(int)end.x-10,20,20);
 
 
+        //g2d.setColor(Color.RED);
+        //g2d.drawLine((int)Graph.a.get(236).start.getY(),(int)Graph.a.get(236).start.getX(),(int)Graph.a.get(236).end.getY(),(int)Graph.a.get(236).end.getX());
+        //g2d.drawLine((int)Graph.a.get(30).start.getY(),(int)Graph.a.get(30).start.getX(),(int)Graph.a.get(30).end.getY(),(int)Graph.a.get(30).end.getX());
         /*int s = r.nextInt() * 5;
         if(s>2.5){
             g2d.setColor(Color.blue);
@@ -164,6 +193,7 @@ public class Area extends JPanel {
 
         g2d.setColor(Color.BLACK);
 
+        //Potential
         try {
             Potential pe = new Potential(20,20,20,20,20);
             pe.render(g);
@@ -171,6 +201,15 @@ public class Area extends JPanel {
             e.printStackTrace();
         }
 
+        Point newP = Graph.aStar(Graph.points.get(0),Graph.points.get(1));
+        Graph.printPath(start,newP,g2d);
+
+
+        //Start and endpoint
+        g2d.setColor(Color.RED);
+        g2d.fillOval((int)start.y-10,(int)start.x-10,20,20);
+        g2d.setColor(Color.GREEN);
+        g2d.fillOval((int)end.y-10,(int)end.x-10,20,20);
     }
 
 

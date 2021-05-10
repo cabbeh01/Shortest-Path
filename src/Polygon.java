@@ -6,10 +6,11 @@ public class Polygon {
 
     int id;
 
-    Edge[] edges;
-
     //bottom right top left
     //0     1       2   3
+    Edge[] edges;
+
+
     public Polygon(Edge[] edges,int[] xarray, int[] yarray, int npoint,int id){
         this.edges = edges;
         this.id = id;
@@ -53,7 +54,12 @@ public class Polygon {
         //System.out.println(count);
 
         //System.out.println(count);
-        return count != 4;
+        if(count != 4){
+            a.start.removeBranch(a.end);
+            a.end.removeBranch(a.start);
+            return true;
+        }
+        return false;
 
 
 
@@ -85,9 +91,10 @@ public class Polygon {
 
     public static boolean edgeNotCrossEdge(Edge a, Edge b){
 
+        /*
         if(isPointOnLine(b,a.start) && !isPointOnLine(b,a.end) || isPointOnLine(b,a.end) && !isPointOnLine(b,a.start)){
             return true;
-        }
+        }*/
 
         if(isPointOnLine(a,b.start) && !isPointOnLine(a,b.end) || isPointOnLine(a,b.end) && !isPointOnLine(a,b.start)){
             return true;
@@ -121,6 +128,7 @@ public class Polygon {
 
     public static boolean isInPoly(Polygon pol,Point p){
 
+        int count = 0;
         for(Edge a : pol.edges){
             if(a.compareTo(p) <= 0){
                 return false;
