@@ -1,0 +1,7 @@
+Forbidden
+Polygon: 0
+The edges are:
+(500,500,600,500). Length: 100)
+(600,500,600,700). Length: 100)
+(600,700,500,700). Length: 100)
+(500,700,500,500). Length: 100)

@@ -1,4 +1,3 @@
-import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -18,6 +17,12 @@ public class Area extends JPanel {
     public Area(){
         try {
             SC = new StringCutter("area1.txt");
+            SC = new StringCutter("forbidden.txt");
+
+            /*Point corner1 = new Point(50,950);
+            Point corner2 = new Point(100,850);
+
+            Forbidden.createblock(corner1,corner2);*/
             generateUsablePoints();
             generateUsableEdges();
             this.repaint();
@@ -55,7 +60,9 @@ public class Area extends JPanel {
         Graph.points.add(start);
         Graph.points.add(end);
         for(Polygon pol : Graph.polygons){
-            Graph.points.addAll(Arrays.asList(pol.getCorners()));
+           if(!pol.getClass().getName().equals("Forbidden")){
+               Graph.points.addAll(Arrays.asList(pol.getCorners()));
+            }
         }
 
         for(Polygon poly : Graph.polygons){
@@ -115,6 +122,12 @@ public class Area extends JPanel {
 
 
         for(Polygon a : Graph.polygons){
+            if(a.getClass().getName().equals("Forbidden")){
+                g2d.setColor(Color.MAGENTA);
+            }
+            else{
+                g2d.setColor(Color.BLACK);
+            }
             g2d.fillPolygon(a.yarray,a.xarray,8);
         }
 
@@ -161,35 +174,6 @@ public class Area extends JPanel {
             g2d.drawLine((int)Graph.a.get(i).start.getY(),(int)Graph.a.get(i).start.getX(),(int)Graph.a.get(i).end.getY(),(int)Graph.a.get(i).end.getX());
             //g2d.fillOval((int)Graph.points.get(i).getY()-5,(int)Graph.points.get(i).getX()-5,10,10);
         }
-
-
-
-        //g2d.setColor(Color.RED);
-        //g2d.drawLine((int)Graph.a.get(236).start.getY(),(int)Graph.a.get(236).start.getX(),(int)Graph.a.get(236).end.getY(),(int)Graph.a.get(236).end.getX());
-        //g2d.drawLine((int)Graph.a.get(30).start.getY(),(int)Graph.a.get(30).start.getX(),(int)Graph.a.get(30).end.getY(),(int)Graph.a.get(30).end.getX());
-        /*int s = r.nextInt() * 5;
-        if(s>2.5){
-            g2d.setColor(Color.blue);
-        }
-        else{
-            g2d.setColor(Color.red);
-        }*/
-        /*
-        for(Edge c : Graph.a){
-            for(Edge d : Graph.a){
-                if(!c.equals(d)){
-                    if(!Polygon.edgeCrossEdge(c,d)){
-                        continue;
-                    }
-                    if(Polygon.edgeCrossesPoly(Graph.ap.get(3), d)){
-                        continue;
-                    }
-                    g2d.drawLine((int)c.start.y,(int)c.start.x,(int)d.start.y,(int)d.start.x);
-                    //g2d.drawLine((int)c.start.y,(int)c.end.x,(int)d.start.y,(int)d.end.x);
-
-                }
-            }
-        }*/
 
         g2d.setColor(Color.BLACK);
 

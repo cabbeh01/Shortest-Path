@@ -33,7 +33,6 @@ public class Point {
         public Point node;
     }
 
-
     @Override
     public int compareTo(Point n) {
         return Double.compare(this.f, n.f);

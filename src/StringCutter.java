@@ -13,6 +13,7 @@ public class StringCutter {
         inp = new Scanner(nFile);
 
         String bound = inp.nextLine();
+        String boundTitle = bound;
 
         //Gettinge the bound
         bound = bound.replaceAll("[()]","").replaceAll("[A-Za-z:]","");
@@ -72,7 +73,15 @@ public class StringCutter {
             Polygon polygon = new Polygon(edges,xPoints,yPoints,8,id);
             //MapCreator.polys.add(polygon);
             //Graph.a.addAll(Arrays.asList(polygon.edges));
-            Graph.polygons.add(polygon);
+            if(boundTitle.contains("Forbidden")){
+                Forbidden polygon = new Forbidden(edges,xPoints,yPoints,8,id);
+                Graph.polygons.add(polygon);
+            }
+            else{
+                Polygon polygon = new Polygon(edges,xPoints,yPoints,8,id);
+                Graph.polygons.add(polygon);
+            }
+
         }
     }
 }
