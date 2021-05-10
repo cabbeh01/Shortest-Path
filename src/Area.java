@@ -7,7 +7,7 @@ public class Area extends JPanel {
     //Creating random object
     Random r = new Random();
 
-    StringCutter SC;
+    //StringCutter SC;
     Graph g;
 
     //Points for the start and end-point
@@ -16,16 +16,12 @@ public class Area extends JPanel {
 
     public Area(){
         try {
-            SC = new StringCutter("area1.txt");
-            SC = new StringCutter("forbidden.txt");
+            new StringCutter("area1.txt");
+            new StringCutter("forbidden.txt");
 
-            /*Point corner1 = new Point(50,950);
-            Point corner2 = new Point(100,850);
-
-            Forbidden.createblock(corner1,corner2);*/
             generateUsablePoints();
             generateUsableEdges();
-            this.repaint();
+            //this.repaint();
             //g = new Graph(Graph.a.size()*4);
             //addtoGraph();
             //g.DFS(0);
@@ -37,17 +33,6 @@ public class Area extends JPanel {
         }
     }
 
-    public void addtoGraph(){
-
-        for(int i = 0; i<Graph.a.size(); i++){
-            for(int j = i+1;j<Graph.a.size(); j++ ){
-                if(i!=j){
-                    //g.addEdge(i,j);
-                }
-            }
-        }
-
-    }
     public static void resetNodes(){
         Graph.points.clear();
         Graph.a.clear();
@@ -87,7 +72,6 @@ public class Area extends JPanel {
                 }
             }
         }
-
 
         System.out.println("Antalet punkter: " + Graph.points.size());
         System.out.println("Antalet Polygoner: " + Graph.polygons.size());
