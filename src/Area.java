@@ -104,14 +104,25 @@ public class Area extends JPanel {
         g2d.rotate(-(Math.PI/2),520,520);
 
 
+
         for(Polygon a : Graph.polygons){
+            int k = 0;
             if(a.getClass().getName().equals("Forbidden")){
-                g2d.setColor(Color.MAGENTA);
+                int alpha = 127; // 50% transparent
+                Color myColour = new Color(255, 0, 0, alpha);
+                g2d.setColor(myColour);
+                g2d.fillPolygon(a.yarray,a.xarray,8);
+                g2d.setColor(Color.RED);
+                g2d.setStroke(new BasicStroke(5));
+                g2d.drawRect(a.yarray[k],a.xarray[k],(int)a.getRight().length,(int) a.getBottom().length);
+                g2d.setStroke(new BasicStroke(1));
+                k++;
             }
             else{
                 g2d.setColor(Color.BLACK);
+                g2d.fillPolygon(a.yarray,a.xarray,8);
             }
-            g2d.fillPolygon(a.yarray,a.xarray,8);
+
         }
 
         //Drawing points
