@@ -16,6 +16,7 @@ public class StringCutter {
         String boundTitle = bound;
 
         //Gettinge the bound
+        /*
         bound = bound.replaceAll("[()]","").replaceAll("[A-Za-z:]","");
         String [] boundArr = bound.split("[, ]");
 
@@ -26,13 +27,7 @@ public class StringCutter {
         System.out.println(bound);
         for(int i= 1; i<=4;i++){
             boundary[i-1] = (int)Double.parseDouble(boundArr[i]);
-        }
-
-        //Kvar att fixa är att göra om bindarys till en tvådim array. För tillfälligt ligger
-        //Värdena i en array
-
-        //Läser in koordinater i textfilerna och skapar Polygoner av det
-        //Kan hända att vi måste skapa Kanter av det och sedan bygga Polygoner av kanterna
+        }*/
 
         int idEdge = 0;
         while(inp.hasNext()){
@@ -70,7 +65,8 @@ public class StringCutter {
 
             //vi behöver skapa 4 edges för varje polygon, denna loopen ^ skapar en
             //Vi behöver skapa en array med polygoner som vi kan spara de i
-            Polygon polygon = new Polygon(edges,xPoints,yPoints,8,id);
+
+
             //MapCreator.polys.add(polygon);
             //Graph.a.addAll(Arrays.asList(polygon.edges));
             if(boundTitle.contains("Forbidden")){
@@ -83,5 +79,6 @@ public class StringCutter {
             }
 
         }
+
     }
 }

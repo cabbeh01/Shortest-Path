@@ -4,13 +4,10 @@ import java.util.List;
 
 //DFS Technique for undirected graph
 class Graph {
-    //private int Vertices;
 
     static ArrayList<Edge> a = new ArrayList<>();
     static ArrayList<Polygon> polygons = new ArrayList<>();
     static ArrayList<Point> points = new ArrayList<>();
-
-    //static ArrayList<Integer> visiting = new ArrayList<>();
 
     public static Point aStar(Point start, Point target){
         PriorityQueue<Point> closedList = new PriorityQueue<>();
@@ -29,9 +26,6 @@ class Graph {
 
             for(Point.Branch edge : n.neighboursEd){
                 Point m = edge.node;
-
-                //double edgelength = Math.sqrt(Math.pow(edge.s-edge.end.x,2)+Math.pow(edge.y-950,2));
-
                 double totalWeight = n.g + edge.weight;
 
                 if(!openList.contains(m) && !closedList.contains(m)){
@@ -79,28 +73,15 @@ class Graph {
         Collections.reverse(id);
 
 
-        Point prev = start;//Start a
+        Point prev = start;//Start punkten
         for(Point ide : ids){
-            System.out.print("("+ide.x + "," +ide.y+" "+","+ide.h+")" +"id: " +ide.id + " ");
-            //g.setColor(Color.ORANGE);
+            //System.out.print("("+ide.x + "," +ide.y+" "+","+ide.h+")" +"id: " +ide.id + " ");
 
-            //g.fillOval((int)ide.getY()-15,(int)ide.getX()-15,30,30);
             g.setColor(Color.RED);
             g.setStroke(new BasicStroke(10));
-
             g.drawLine((int)prev.y,(int)prev.x,(int)ide.y,(int)ide.x);
-
-            prev = ide;
+            prev = ide;//Sparar förra punkten
         }
-        /*
-        for(Integer ide : id){
-            System.out.print("("+ide+")");
-            //g.setColor(Color.BLACK);
-            //g.fillOval((int)ide.getY()-15,(int)ide.getX()-15,30,30);
-        }*/
         System.out.println("");
     }
-
-
-
 }

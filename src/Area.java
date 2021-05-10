@@ -76,12 +76,11 @@ public class Area extends JPanel {
         System.out.println("Antalet punkter: " + Graph.points.size());
         System.out.println("Antalet Polygoner: " + Graph.polygons.size());
 
-        for(Polygon poly : Graph.polygons){
+        for(Polygon poly : Graph.polygons){ //Ta bort grannarna för e
             Graph.a.removeIf(e -> Polygon.edgeCrossesPoly(poly, e));
         }
 
         System.out.println("Antalet edges: " + Graph.a.size());
-        System.out.println(Graph.a.get(40).length + " px");
     }
 
 
@@ -115,29 +114,15 @@ public class Area extends JPanel {
             g2d.fillPolygon(a.yarray,a.xarray,8);
         }
 
-
-
         //Drawing points
         g2d.setColor(Color.GREEN);
 
         g2d.fillOval((int)Graph.points.get(0).getY()-5,(int)Graph.points.get(0).getX()-5,10,10);
         g2d.fillOval((int)Graph.points.get(1).getY()-5,(int)Graph.points.get(1).getX()-5,10,10);
 
+        g2d.setColor(Color.ORANGE);
 
-        g2d.setColor(Color.MAGENTA);
-
-
-
-        /*for(Point p2 : Graph.points.get(0).getNeighbours()){
-            g2d.fillOval((int)p2.getY()-5,(int)p2.getX()-5,10,10);
-        }*/
-
-        /*
-        g2d.setColor(Color.MAGENTA);
-        for(int i = 0; i<Graph.points.size(); i++){
-            g2d.fillOval((int)Graph.points.get(i).getY()-5,(int)Graph.points.get(i).getX()-5,10,10);
-        }*/
-
+        //g2d.fillOval(500-250,500-250,500,500);
 
 
         g2d.setColor(Color.BLUE);
@@ -156,7 +141,6 @@ public class Area extends JPanel {
 
 
             g2d.drawLine((int)Graph.a.get(i).start.getY(),(int)Graph.a.get(i).start.getX(),(int)Graph.a.get(i).end.getY(),(int)Graph.a.get(i).end.getX());
-            //g2d.fillOval((int)Graph.points.get(i).getY()-5,(int)Graph.points.get(i).getX()-5,10,10);
         }
 
         g2d.setColor(Color.BLACK);
@@ -172,15 +156,12 @@ public class Area extends JPanel {
         Point newP = Graph.aStar(Graph.points.get(0),Graph.points.get(1));
         Graph.printPath(start,newP,g2d);
 
-
         //Start and endpoint
         g2d.setColor(Color.RED);
         g2d.fillOval((int)start.y-10,(int)start.x-10,20,20);
         g2d.setColor(Color.GREEN);
         g2d.fillOval((int)end.y-10,(int)end.x-10,20,20);
     }
-
-
 
     /*
     //Variable to see if the game is paused

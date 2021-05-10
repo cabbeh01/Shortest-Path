@@ -29,13 +29,11 @@ public class Polygon {
         if(temp2.compareTo(a.start) == 0 && temp2.compareTo(a.end) == 0){
             return true;
         }*/
-        if(!Polygon.edgeNotCrossEdge(temp1,a)){
+        if(!Polygon.edgeNotCrossEdge(temp1,a) || !Polygon.edgeNotCrossEdge(temp2,a)){
+            a.start.removeBranch(a.end);
+            a.end.removeBranch(a.start);
             return true;
         }
-        if(!Polygon.edgeNotCrossEdge(temp2,a)){
-            return true;
-        }
-
         int count = 0;
         for(Edge e : p.edges){
             if(Polygon.edgeNotCrossEdge(e,a)){
@@ -130,11 +128,19 @@ public class Polygon {
 
         int count = 0;
         for(Edge a : pol.edges){
-            if(a.compareTo(p) <= 0){
-                return false;
+            if(a.compareTo(p) > 0){
+                //return false;
+                count++;
+
+                a.start.removeBranch(a.end);
+                a.end.removeBranch(a.start);
             }
         }
-        return true;
+
+        if(count == pol.edges.length){
+            return true;
+        }
+        return false;
     }
 
     public Edge getBottom() {
@@ -158,6 +164,7 @@ public class Polygon {
     }
 
     public Point[] getCorners(){
+
         Point[] points = new Point[4];
         points[0] = this.getRight().start;
         points[1] = this.getTop().start;
