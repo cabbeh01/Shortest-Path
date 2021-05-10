@@ -9,11 +9,12 @@ import java.util.Arrays;
 public class MapCreator {
 
     //public static ArrayList<Polygon> polys = new ArrayList<>();
+    public static Dimension dim = new Dimension(1000, 800);
 
     public static void main(String[] args) throws IOException {
 
         JFrame map = new JFrame("Map");
-        map.setPreferredSize(new Dimension(1000, 800));
+        map.setPreferredSize(dim);
 
 
         map.pack();

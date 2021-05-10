@@ -7,13 +7,15 @@ public class ControlArea extends JPanel {
 
     JButton btnStartPoint = new JButton("Startpunkt");
     JButton btnEndPoint = new JButton("Slutpunkt");
+    JButton btnPotential = new JButton("Potential: AV");
 
     public ControlArea(JFrame jp){
         this.setBackground(Color.DARK_GRAY);
         this.add(btnStartPoint,BorderLayout.NORTH);
         this.add(btnEndPoint,BorderLayout.NORTH);
+        this.add(btnPotential,BorderLayout.NORTH);
         setPrefSizes();
-        buttonLayout(btnEndPoint,btnStartPoint);
+        buttonLayout(btnEndPoint,btnStartPoint,btnPotential);
 
         btnStartPoint.addActionListener(e -> {
             String result = (String)JOptionPane.showInputDialog(

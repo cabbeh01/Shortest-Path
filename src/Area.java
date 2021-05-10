@@ -16,11 +16,11 @@ public class Area extends JPanel {
 
     public Area(){
         try {
-            SC = new StringCutter("area4.txt");
+            SC = new StringCutter("area1.txt");
             generateUsablePoints();
             generateUsableEdges();
             this.repaint();
-            g = new Graph(Graph.a.size());
+            //g = new Graph(Graph.a.size()*4);
             //addtoGraph();
             //g.DFS(0);
             System.out.println(Arrays.toString(g.visiting.toArray()));
@@ -49,8 +49,8 @@ public class Area extends JPanel {
     //Denna metod gör att vi hittar hörnpunkterna på byggnaderna utifrån de
     //koordinater som vi har
     public static void generateUsablePoints(){
-        //Graph.points.add(start);
-        //Graph.points.add(end);
+        Graph.points.add(start);
+        Graph.points.add(end);
         for(Polygon pol : Graph.polygons){
             Graph.points.addAll(Arrays.asList(pol.getCorners()));
         }
@@ -80,6 +80,100 @@ public class Area extends JPanel {
 
         System.out.println("Antalet edges: " + Graph.a.size());
     }
+
+
+
+
+    //The paint component to draw the panel
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+
+
+        Graphics2D g2d = (Graphics2D)g;
+
+        this.setBackground(Color.WHITE);
+
+        //Enabling antialias to get a smoother experience
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        g2d.setColor(Color.BLACK);
+        g2d.scale(0.72,0.72);
+        g2d.rotate(-(Math.PI/2),520,520);
+
+
+        for(Polygon a : Graph.polygons){
+            g2d.fillPolygon(a.yarray,a.xarray,8);
+        }
+
+
+
+        g2d.setColor(Color.MAGENTA);
+/*
+        for(int i = 0; i<Graph.points.size(); i++){
+            g2d.fillOval((int)Graph.points.get(i).getY()-5,(int)Graph.points.get(i).getX()-5,10,10);
+        }
+*/
+
+
+        g2d.setColor(Color.BLUE);
+        /*for(Edge e1 : Graph.a){
+            g2d.drawLine((int)e1.start.getY(),(int)e1.start.getX(),(int)e1.end.getY(),(int)e1.end.getX());
+        }*/
+
+        for(int i = 0; i<Graph.a.size(); i++){
+            if(Graph.visiting.contains(i)){
+                g2d.setColor(Color.GREEN);
+            }
+            else
+                g2d.setColor(Color.BLUE);
+
+            g2d.drawLine((int)Graph.a.get(i).start.getY(),(int)Graph.a.get(i).start.getX(),(int)Graph.a.get(i).end.getY(),(int)Graph.a.get(i).end.getX());
+            //g2d.fillOval((int)Graph.points.get(i).getY()-5,(int)Graph.points.get(i).getX()-5,10,10);
+        }
+
+        g2d.setColor(Color.RED);
+        g2d.fillOval((int)start.y-10,(int)start.x-10,20,20);
+        g2d.setColor(Color.GREEN);
+        g2d.fillOval((int)end.y-10,(int)end.x-10,20,20);
+
+
+        /*int s = r.nextInt() * 5;
+        if(s>2.5){
+            g2d.setColor(Color.blue);
+        }
+        else{
+            g2d.setColor(Color.red);
+        }*/
+        /*
+        for(Edge c : Graph.a){
+            for(Edge d : Graph.a){
+                if(!c.equals(d)){
+                    if(!Polygon.edgeCrossEdge(c,d)){
+                        continue;
+                    }
+                    if(Polygon.edgeCrossesPoly(Graph.ap.get(3), d)){
+                        continue;
+                    }
+                    g2d.drawLine((int)c.start.y,(int)c.start.x,(int)d.start.y,(int)d.start.x);
+                    //g2d.drawLine((int)c.start.y,(int)c.end.x,(int)d.start.y,(int)d.end.x);
+
+                }
+            }
+        }*/
+
+        g2d.setColor(Color.BLACK);
+
+        try {
+            Potential pe = new Potential(20,20,20,20,20);
+            pe.render(g);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
     /*
     //Variable to see if the game is paused
@@ -125,84 +219,4 @@ public class Area extends JPanel {
         }
     }
 */
-
-    //The paint component to draw the panel
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-
-
-        Graphics2D g2d = (Graphics2D)g;
-
-        this.setBackground(Color.WHITE);
-
-        //Enabling antialias to get a smoother experience
-        //g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        g2d.setColor(Color.BLACK);
-        g2d.scale(0.72,0.72);
-        g2d.rotate(-(Math.PI/2),520,520);
-
-
-        for(Polygon a : Graph.polygons){
-            g2d.fillPolygon(a.yarray,a.xarray,8);
-        }
-
-
-
-        g2d.setColor(Color.MAGENTA);
-
-        for(int i = 0; i<Graph.points.size(); i++){
-            g2d.fillOval((int)Graph.points.get(i).getY()-5,(int)Graph.points.get(i).getX()-5,10,10);
-        }
-
-        g2d.setColor(Color.RED);
-        g2d.fillOval((int)start.y-10,(int)start.x-10,20,20);
-        g2d.setColor(Color.GREEN);
-        g2d.fillOval((int)end.y-10,(int)end.x-10,20,20);
-
-        g2d.setColor(Color.BLUE);
-        /*for(Edge e1 : Graph.a){
-            g2d.drawLine((int)e1.start.getY(),(int)e1.start.getX(),(int)e1.end.getY(),(int)e1.end.getX());
-        }*/
-
-        for(int i = 0; i<Graph.a.size(); i++){
-            if(Graph.visiting.contains(i)){
-                g2d.setColor(Color.GREEN);
-            }
-            else
-                g2d.setColor(Color.white);
-
-            g2d.drawLine((int)Graph.a.get(i).start.getY(),(int)Graph.a.get(i).start.getX(),(int)Graph.a.get(i).end.getY(),(int)Graph.a.get(i).end.getX());
-            //g2d.fillOval((int)Graph.points.get(i).getY()-5,(int)Graph.points.get(i).getX()-5,10,10);
-        }
-
-
-
-        /*int s = r.nextInt() * 5;
-        if(s>2.5){
-            g2d.setColor(Color.blue);
-        }
-        else{
-            g2d.setColor(Color.red);
-        }*/
-        /*
-        for(Edge c : Graph.a){
-            for(Edge d : Graph.a){
-                if(!c.equals(d)){
-                    if(!Polygon.edgeCrossEdge(c,d)){
-                        continue;
-                    }
-                    if(Polygon.edgeCrossesPoly(Graph.ap.get(3), d)){
-                        continue;
-                    }
-                    g2d.drawLine((int)c.start.y,(int)c.start.x,(int)d.start.y,(int)d.start.x);
-                    //g2d.drawLine((int)c.start.y,(int)c.end.x,(int)d.start.y,(int)d.end.x);
-
-                }
-            }
-        }*/
-
-        g2d.setColor(Color.BLACK);
-    }
 }
