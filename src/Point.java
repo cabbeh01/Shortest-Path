@@ -6,7 +6,6 @@ public class Point implements Comparable<Point>{
     int id;
     private static int idCounter = 0;
 
-
     public double f = Double.MAX_VALUE;
     public double g = Double.MAX_VALUE;
     public double h;

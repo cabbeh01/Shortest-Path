@@ -21,14 +21,16 @@ public class Area extends JPanel {
 
             generateUsablePoints();
             generateUsableEdges();
+            Graph.aStar(Graph.points.get(0),Graph.points.get(1));
             //this.repaint();
             //g = new Graph(Graph.a.size()*4);
             //addtoGraph();
             //g.DFS(0);
-           // System.out.println(Arrays.toString(g.visiting.toArray()));
+            // System.out.println(Arrays.toString(g.visiting.toArray()));
             //Graph.aStar(start,end);
 
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -39,6 +41,7 @@ public class Area extends JPanel {
         generateUsablePoints();
         generateUsableEdges();
     }
+
     //Denna metod gör att vi hittar hörnpunkterna på byggnaderna utifrån de
     //koordinater som vi har
     public static void generateUsablePoints(){
@@ -82,8 +85,6 @@ public class Area extends JPanel {
 
         System.out.println("Antalet edges: " + Graph.a.size());
     }
-
-
 
 
     //The paint component to draw the panel
@@ -164,13 +165,13 @@ public class Area extends JPanel {
             e.printStackTrace();
         }
 
-        Point newP = Graph.aStar(Graph.points.get(0),Graph.points.get(1));
-        Graph.printPath(start,newP,g2d);
+
+        Graph.printPath(start,end,g2d);
 
         //Start and endpoint
-        g2d.setColor(Color.RED);
+        g2d.setColor(ControlArea.startP);
         g2d.fillOval((int)start.y-10,(int)start.x-10,20,20);
-        g2d.setColor(Color.GREEN);
+        g2d.setColor(ControlArea.endP);
         g2d.fillOval((int)end.y-10,(int)end.x-10,20,20);
     }
 

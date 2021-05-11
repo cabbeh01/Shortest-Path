@@ -4,18 +4,44 @@ import java.awt.*;
 
 public class ControlArea extends JPanel {
 
+    public static Color startP = Color.RED;
+    public static Color endP = Color.GREEN;
+    public static Color road = Color.BLUE;
+    public static Color shortestRoad = Color.RED;
+
 
     JButton btnStartPoint = new JButton("Startpunkt");
     JButton btnEndPoint = new JButton("Slutpunkt");
+    JButton btnShortestRoad = new JButton("Kortaste vägen");
+    JButton btnShortestRoadColor = new JButton("");
     JButton btnPotential = new JButton("Potential: AV");
+    JButton btnStartColor = new JButton("");
+    JButton btnEndColor = new JButton("");
+
+    JLabel lblEmpty = new JLabel("");
+
 
     public ControlArea(JFrame jp){
         this.setBackground(Color.DARK_GRAY);
+
         this.add(btnStartPoint,BorderLayout.NORTH);
+        this.add(btnStartColor,BorderLayout.NORTH);
+
         this.add(btnEndPoint,BorderLayout.NORTH);
+        this.add(btnEndColor,BorderLayout.NORTH);
+
+        this.add(lblEmpty,BorderLayout.NORTH);
+
+        this.add(btnShortestRoad,BorderLayout.NORTH);
+        this.add(btnShortestRoadColor,BorderLayout.NORTH);
         this.add(btnPotential,BorderLayout.NORTH);
         setPrefSizes();
-        buttonLayout(btnEndPoint,btnStartPoint,btnPotential);
+        setColorToButton();
+
+        lblEmpty.setFont(new Font("Arial Black", Font.PLAIN, 24));
+        lblEmpty.setHorizontalAlignment(SwingConstants.CENTER);
+        buttonLayout(btnEndPoint,btnStartPoint,btnPotential,btnStartColor,btnEndColor
+        ,btnShortestRoad,btnShortestRoadColor);
 
         btnStartPoint.addActionListener(e -> {
             String result = (String)JOptionPane.showInputDialog(
@@ -92,11 +118,51 @@ public class ControlArea extends JPanel {
                 }
             }
         });
+
+        btnStartColor.addActionListener(e -> {
+            startP = JColorChooser.showDialog(
+                    new JColorChooser(),
+                    "Choose Background Color",Color.BLACK);
+
+            btnStartColor.setBackground(startP);
+            jp.repaint();
+        });
+
+        btnEndColor.addActionListener(e -> {
+            endP = JColorChooser.showDialog(
+                    new JColorChooser(),
+                    "Choose Background Color",Color.BLACK);
+
+            btnEndColor.setBackground(endP);
+
+            jp.repaint();
+        });
+
+
+        btnShortestRoadColor.addActionListener(e -> {
+            shortestRoad = JColorChooser.showDialog(
+                    new JColorChooser(),
+                    "Choose Background Color",Color.BLACK);
+
+            btnShortestRoadColor.setBackground(shortestRoad);
+
+            jp.repaint();
+        });
+
     }
 
     public void setPrefSizes(){
-        btnStartPoint.setPreferredSize(new Dimension(120, 30));
-        btnEndPoint.setPreferredSize(new Dimension(120, 30));
+        btnStartPoint.setPreferredSize(new Dimension(160, 30));
+        btnEndPoint.setPreferredSize(new Dimension(160, 30));
+        btnStartColor.setPreferredSize(new Dimension(30, 30));
+        btnEndColor.setPreferredSize(new Dimension(30, 30));
+        btnShortestRoadColor.setPreferredSize(new Dimension(30, 30));
+        btnShortestRoad.setPreferredSize(new Dimension(160, 30));
+        btnPotential.setPreferredSize(new Dimension(160, 30));
+
+
+        lblEmpty.setPreferredSize(new Dimension(185,30));
+
     }
 
     private static void buttonLayout(JButton ... a) {
@@ -105,6 +171,13 @@ public class ControlArea extends JPanel {
             button.setUI(new BasicButtonUI());
         }
     }
+
+    public void setColorToButton(){
+        btnStartColor.setBackground(startP);
+        btnEndColor.setBackground(endP);
+        btnShortestRoadColor.setBackground(shortestRoad);
+    }
+
 
     //The paint component to draw the panel
     @Override

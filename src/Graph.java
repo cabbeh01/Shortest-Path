@@ -77,7 +77,7 @@ class Graph {
         for(Point ide : ids){
             //System.out.print("("+ide.x + "," +ide.y+" "+","+ide.h+")" +"id: " +ide.id + " ");
 
-            g.setColor(Color.RED);
+            g.setColor(ControlArea.shortestRoad);
             g.setStroke(new BasicStroke(10));
             g.drawLine((int)prev.y,(int)prev.x,(int)ide.y,(int)ide.x);
             prev = ide;//Sparar förra punkten
