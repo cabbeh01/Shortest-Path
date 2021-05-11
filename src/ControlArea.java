@@ -149,6 +149,17 @@ public class ControlArea extends JPanel {
             jp.repaint();
         });
 
+        btnPotential.addActionListener(e -> {
+            Area.potential = !Area.potential;
+            if(Area.potential){
+                btnPotential.setText("Potential: PÅ");
+            }
+            else{
+                btnPotential.setText("Potential: AV");
+            }
+            jp.repaint();
+        });
+
     }
 
     public void setPrefSizes(){

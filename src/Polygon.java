@@ -10,7 +10,6 @@ public class Polygon {
     //0     1       2   3
     Edge[] edges;
 
-
     public Polygon(Edge[] edges,int[] xarray, int[] yarray, int npoint,int id){
         this.edges = edges;
         this.id = id;
@@ -22,13 +21,7 @@ public class Polygon {
     public static boolean edgeCrossesPoly(Polygon p ,Edge a){
         Edge temp1 = new Edge(p.edges[0].start,p.edges[2].start,0,0);
         Edge temp2 = new Edge(p.edges[3].start,p.edges[1].start,0,0);
-/*
-        if(temp1.compareTo(a.start) == 0 && temp1.compareTo(a.end) == 0){
-            return true;
-        }
-        if(temp2.compareTo(a.start) == 0 && temp2.compareTo(a.end) == 0){
-            return true;
-        }*/
+
         if(!Polygon.edgeNotCrossEdge(temp1,a) || !Polygon.edgeNotCrossEdge(temp2,a)){
             a.start.removeBranch(a.end);
             a.end.removeBranch(a.start);
@@ -40,59 +33,20 @@ public class Polygon {
                 count++;
             }
         }
-/*
-        if(Polygon.isInPoly(p,a.start)){
-            return true;
-        }
-        if(Polygon.isInPoly(p,a.end)){
-            return true;
-        }*/
 
-
-        //System.out.println(count);
-
-        //System.out.println(count);
         if(count != 4){
             a.start.removeBranch(a.end);
             a.end.removeBranch(a.start);
             return true;
         }
         return false;
-
-
-
-
-
-
-        /*if(temp1.compareTo(a.end)> 0 || temp2.compareTo(a.end)> 0){
-            return true;
-        }*/
-        /*
-        if(temp2.compareTo(a.start)< 0 || temp2.compareTo(a.end)< 0){
-            return true;
-        }*/
-
-
-        /*
-        for(int i = 0; i<p.edges.length; i++){
-            if((p.edges[i].start == a.start && p.edges[i].end == a.end )){
-                return true;
-            }
-        }*/
     }
 
     public static boolean isPointOnLine(Edge a, Point b) {
         return a.compareTo(b) == 0;
     }
 
-
-
     public static boolean edgeNotCrossEdge(Edge a, Edge b){
-
-        /*
-        if(isPointOnLine(b,a.start) && !isPointOnLine(b,a.end) || isPointOnLine(b,a.end) && !isPointOnLine(b,a.start)){
-            return true;
-        }*/
 
         if(isPointOnLine(a,b.start) && !isPointOnLine(a,b.end) || isPointOnLine(a,b.end) && !isPointOnLine(a,b.start)){
             return true;
@@ -101,19 +55,6 @@ public class Polygon {
         if(a.compareTo(b.start) == 0 || a.compareTo(b.end) == 0 ){
             return true;
         }
-
-        /*
-        if(a.compareTo(b.start) == 0 && a.compareTo(b.end) != 0 || a.compareTo(b.end) == 0 && a.compareTo(b.start) != 0){
-            return true;
-        }
-
-        if(a.compareTo(b.start) > 0 && a.compareTo(b.end) > 0 && !(a.compareTo(b.start) < 0 && a.compareTo(b.end) <0 )){
-            return true;
-        }
-
-        if(a.compareTo(b.start) < 0 && a.compareTo(b.end) < 0 && !(a.compareTo(b.start) > 0 && a.compareTo(b.end) >0 )){
-            return true;
-        }*/
 
         //Höger sida om
         if(b.compareTo(a.start) > 0 && b.compareTo(a.end) > 0 || a.compareTo(b.start) > 0 && a.compareTo(b.end) > 0){
@@ -157,10 +98,6 @@ public class Polygon {
 
     public Edge getTop() {
         return edges[2];
-    }
-
-    public int getId() {
-        return id;
     }
 
     public Point[] getCorners(){

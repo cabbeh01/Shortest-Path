@@ -6,7 +6,7 @@ public class StringCutter {
 
     File nFile;
     Scanner inp;
-    public static int[] boundary = new int[4];
+    //public static int[] boundary = new int[4];
 
     public StringCutter(String file) throws FileNotFoundException {
         nFile = new File(System.getProperty("user.dir")+"\\"+"maps"+"\\"+file);
