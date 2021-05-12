@@ -5,7 +5,7 @@ import java.util.List;
 //DFS Technique for undirected graph
 class Graph {
 
-    static ArrayList<Edge> a = new ArrayList<>();
+    static ArrayList<Edge> edges = new ArrayList<>();
     static ArrayList<Polygon> polygons = new ArrayList<>();
     static ArrayList<Point> points = new ArrayList<>();
 

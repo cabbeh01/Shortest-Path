@@ -26,10 +26,10 @@ public class Area extends JPanel {
     public void resetNodes(){
         Graph.polygons.clear();
         Graph.points.clear();
-        Graph.a.clear();
+        Graph.edges.clear();
 
         try {
-            new StringCutter("area2.txt");
+            new StringCutter("area4.txt");
             if (blockedareas)
                 new StringCutter("forbidden.txt");
         }
@@ -73,7 +73,7 @@ public class Area extends JPanel {
                     //Graph.points.get(j).addneighbours(Graph.points.get(i));
                     Graph.points.get(i).addBranch(distance,Graph.points.get(j));
                     Graph.points.get(j).addBranch(distance,Graph.points.get(i));
-                    Graph.a.add(newedge);
+                    Graph.edges.add(newedge);
                 }
             }
         }
@@ -81,13 +81,13 @@ public class Area extends JPanel {
         System.out.println("Antalet punkter: " + Graph.points.size());
         System.out.println("Antalet Polygoner: " + Graph.polygons.size());
 
-        Graph.polygons.forEach(p -> Graph.a.removeIf(e -> Polygon.edgeCrossesPoly(p,e)));
+        Graph.polygons.forEach(p -> Graph.edges.removeIf(e -> Polygon.edgeCrossesPoly(p,e)));
 
         /*for(Polygon poly : Graph.polygons){ //Ta bort grannarna för e
             Graph.a.removeIf(e -> Polygon.edgeCrossesPoly(poly, e));
         }*/
 
-        System.out.println("Antalet edges: " + Graph.a.size());
+        System.out.println("Antalet edges: " + Graph.edges.size());
     }
 
 
@@ -135,8 +135,8 @@ public class Area extends JPanel {
         }*/
 
         g2d.setColor(Color.BLUE);
-        for(int i = 0; i<Graph.a.size(); i++){ //DEBUGA KANTER
-            g2d.drawLine((int)Graph.a.get(i).start.getY(),(int)Graph.a.get(i).start.getX(),(int)Graph.a.get(i).end.getY(),(int)Graph.a.get(i).end.getX());
+        for(int i = 0; i<Graph.edges.size(); i++){ //DEBUGA KANTER
+            g2d.drawLine((int)Graph.edges.get(i).start.getY(),(int)Graph.edges.get(i).start.getX(),(int)Graph.edges.get(i).end.getY(),(int)Graph.edges.get(i).end.getX());
         }
 
         g2d.setColor(Color.BLACK);
@@ -154,10 +154,7 @@ public class Area extends JPanel {
             }
         }
 
-
-        Point newP = Graph.aStar(Graph.points.get(0),Graph.points.get(1));
         Graph.printPath(start,newP,g2d);
-        //this.repaint();
 
         //Start and endpoint
         g2d.setColor(ControlArea.startP);

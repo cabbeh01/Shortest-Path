@@ -93,7 +93,7 @@ public class ControlArea extends JPanel {
                     JOptionPane.PLAIN_MESSAGE,
                     null,
                     null,
-                    "50,50"
+                    "950,950"
             );
             if(result != null && result.length() > 0){
                 try{
@@ -119,8 +119,6 @@ public class ControlArea extends JPanel {
                     } else{
                         Area.end = temp;
                     }
-
-                    //jp.repaint();
                 }
                 catch (Exception s){
                     JOptionPane.showConfirmDialog(jp, s.getMessage(),"Error: isn't a valid point", JOptionPane.PLAIN_MESSAGE);
