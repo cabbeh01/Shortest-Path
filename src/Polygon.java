@@ -109,5 +109,4 @@ public class Polygon {
         points[3] = this.getBottom().start;
         return points;
     }
-
 }

@@ -9,18 +9,11 @@ public class Area extends JPanel {
     static Point start = new Point(50,50);
     static Point end  = new Point(950,950);
     static boolean potential = false;
+    static boolean blockedareas = false;
 
+    static Point newP;
     public Area(){
-        try {
-            new StringCutter("area1.txt");
-            //new StringCutter("forbidden.txt");
-
-            generateUsablePoints();
-            generateUsableEdges();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        resetNodes();
     }
 
     public void resetNodes(){
@@ -69,8 +62,6 @@ public class Area extends JPanel {
                     //Räknar ut längden för varje ritad kant
                     double distance = Math.sqrt(Math.pow(Graph.points.get(i).x-Graph.points.get(j).x,2)+Math.pow(Graph.points.get(i).y-Graph.points.get(j).y,2));
                     Edge newedge = new Edge(Graph.points.get(i),Graph.points.get(j),distance,i);
-                    //Graph.points.get(i).addneighbours(Graph.points.get(j));
-                    //Graph.points.get(j).addneighbours(Graph.points.get(i));
                     Graph.points.get(i).addBranch(distance,Graph.points.get(j));
                     Graph.points.get(j).addBranch(distance,Graph.points.get(i));
                     Graph.edges.add(newedge);
@@ -107,10 +98,9 @@ public class Area extends JPanel {
         g2d.rotate(-(Math.PI/2),520,520);
 
 
-        for(Polygon a : Graph.polygons){
+        for(Polygon a : Graph.polygons){ //We loop over all the polygons, including our forbidden areas
 
             if(a.getClass().getName().equals("Forbidden")){
-                //int alpha = 127; // 50% transparent
                 Color myColour = new Color(255, 0, 0, 127);
                 g2d.setColor(myColour);
                 g2d.fillPolygon(a.yarray,a.xarray,8);
@@ -144,6 +134,7 @@ public class Area extends JPanel {
         //Potential
         if(potential){
             try {
+
                 //Potential pe = new Potential(MapCreator.dim.height/2+100,MapCreator.dim.height/2+125,100,5,5, this);
                 Potential p = new Potential();
                 //resetNodes();

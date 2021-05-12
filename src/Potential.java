@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Potential {
 
@@ -12,29 +13,29 @@ public class Potential {
         return A*Math.exp(-((Math.pow(p.x-x,2)/(2*Math.pow(sigX,2)))+(Math.pow(p.y-y,2)/(2*Math.pow(sigY,2)))));
     }
 
-    public int getX() {
-        return x;
+    public static double getvalue(Point pointS, Point pointE) {
+
+        if(!Area.potential)
+            return 0;
+
+        double fullpotential = 0;
+        double hippityx = (pointS.x - pointE.x)/50;
+        double hiippityy =(pointS.y - pointE.y)/50;
+
+        for (int i = 0; i < 50; i++) {
+            fullpotential =+ potentialAt(new Point(pointS.x+hippityx*i,pointS.y+hiippityy*i));
+        }
+
+        return (fullpotential/50)*100; //Värdet multipliceras med 100 så att det är i samma storlek som längden
     }
 
-    public int getY() {
-        return y;
-    }
-
-    public void render(Graphics g){
-
+    public void render(Graphics g){ //Skapar cirklarna
 
         Color myColour = new Color(255, 100, 20, 67);
         g.setColor(myColour);
-        //g.fillOval(MapCreator.dim.height/2-100, MapCreator.dim.height/2+25-100,400,400);
-        g.setColor(myColour);
-
-        //g.fillOval(MapCreator.dim.height/2, MapCreator.dim.height/2+25,200,200);
 
         for(int i = 0; i<11; i++){
             g.fillOval(y-i*i*5, x-i*i*5,10+i*i*10,10+i*i*10);
         }
-        g.setColor(Color.MAGENTA);
-
-
     }
 }

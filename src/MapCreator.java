@@ -17,7 +17,6 @@ public class MapCreator {
         JFrame map = new JFrame("Map");
         map.setPreferredSize(dim);
 
-
         map.pack();
         map.setVisible(true);
 

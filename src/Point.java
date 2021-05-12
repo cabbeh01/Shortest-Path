@@ -9,7 +9,6 @@ public class Point implements Comparable<Point>{
     public double f = Double.MAX_VALUE;
     public double g = Double.MAX_VALUE;
     public double h;
-    public double extraweight =0;
 
     public Point parent = null;
 
@@ -47,7 +46,7 @@ public class Point implements Comparable<Point>{
 
     public class Branch {
         Branch(double weight, Point node){
-            this.weight = weight + node.extraweight;
+            this.weight = weight + Potential.getvalue(Point.this,node);
             this.node = node;
         }
 
@@ -59,5 +58,4 @@ public class Point implements Comparable<Point>{
     public int compareTo(Point n) {
         return Double.compare(this.f, n.f);
     }
-
 }

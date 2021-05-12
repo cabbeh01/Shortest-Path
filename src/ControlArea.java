@@ -15,6 +15,7 @@ public class ControlArea extends JPanel {
     JButton btnShortestRoad = new JButton("Kortaste vägen");
     JButton btnShortestRoadColor = new JButton("");
     JButton btnPotential = new JButton("Potential: AV");
+    JButton btnForbidden = new JButton("Forbidden: AV");
     JButton btnStartColor = new JButton("");
     JButton btnEndColor = new JButton("");
 
@@ -38,12 +39,13 @@ public class ControlArea extends JPanel {
         this.add(btnShortestRoad,BorderLayout.NORTH);
         this.add(btnShortestRoadColor,BorderLayout.NORTH);
         this.add(btnPotential,BorderLayout.NORTH);
+        this.add(btnForbidden,BorderLayout.NORTH);
         setPrefSizes();
         setColorToButton();
 
         lblEmpty.setFont(new Font("Arial Black", Font.PLAIN, 24));
         lblEmpty.setHorizontalAlignment(SwingConstants.CENTER);
-        buttonLayout(btnEndPoint,btnStartPoint,btnPotential,btnStartColor,btnEndColor
+        buttonLayout(btnEndPoint,btnStartPoint,btnPotential,btnForbidden,btnStartColor,btnEndColor
         ,btnShortestRoad,btnShortestRoadColor);
 
         btnStartPoint.addActionListener(e -> {
@@ -70,8 +72,13 @@ public class ControlArea extends JPanel {
                         }
                     }
                     if(a==0){
-                        Area.start = newP;
-                        Area.resetNodes();
+                        if (newP.x > 1000 || newP.x < 0 || newP.y > 1000 || newP.y < 0 ) { //Kolla ifall den är utanför
+                            JOptionPane.showConfirmDialog(jp, "Point is outside the map! Choose a new point","Error: Must be between 0-1000px", JOptionPane.PLAIN_MESSAGE);
+                            Area.start = temp;
+                        } else {
+                            Area.start = newP;
+                            MapCreator.s.resetNodes();
+                        }
                     }
                     else{
                         Area.start = temp;
@@ -130,15 +137,18 @@ public class ControlArea extends JPanel {
             Color temp = startP;
             startP = JColorChooser.showDialog(new JColorChooser(), "Choose start point colour",startP);
 
+            if(startP == null)
+                startP = temp;
             btnStartColor.setBackground(startP);
             jp.repaint();
         });
 
         btnEndColor.addActionListener(e -> {
-            endP = JColorChooser.showDialog(
-                    new JColorChooser(),
-                    "Choose Background Color",Color.BLACK);
+            Color temp = endP;
+            endP = JColorChooser.showDialog(new JColorChooser(), "Choose end point colour",endP);
 
+            if (endP == null)
+                endP = temp;
             btnEndColor.setBackground(endP);
             jp.repaint();
         });
@@ -147,7 +157,7 @@ public class ControlArea extends JPanel {
         btnShortestRoadColor.addActionListener(e -> {
             shortestRoad = JColorChooser.showDialog(
                     new JColorChooser(),
-                    "Choose Background Color",Color.BLACK);
+                    "Choose road colour",shortestRoad);
 
             btnShortestRoadColor.setBackground(shortestRoad);
             jp.repaint();
@@ -161,7 +171,32 @@ public class ControlArea extends JPanel {
             else{
                 btnPotential.setText("Potential: AV");
             }
-            jp.repaint();
+
+            Area.start = new Point(Area.start.x,Area.start.y);
+            Area.end = new Point(Area.end.x,Area.end.y);;
+
+            MapCreator.s.resetNodes();
+        });
+
+        btnForbidden.addActionListener(e -> {
+
+            Area.blockedareas = !Area.blockedareas;
+
+            if(Area.blockedareas){
+                btnForbidden.setText("Forbidden: PÅ");
+            }
+            else{
+                btnForbidden.setText("Forbidden: AV");
+
+            }
+
+            Point tempStart = Area.start;
+            Point tempEnd = Area.end;
+
+            Area.start = new Point(tempStart.x,tempStart.y);
+            Area.end = new Point(tempEnd.x,tempEnd.y);;
+
+            MapCreator.s.resetNodes();
         });
 
     }
@@ -174,6 +209,7 @@ public class ControlArea extends JPanel {
         btnShortestRoadColor.setPreferredSize(new Dimension(30, 30));
         btnShortestRoad.setPreferredSize(new Dimension(160, 30));
         btnPotential.setPreferredSize(new Dimension(160, 30));
+        btnForbidden.setPreferredSize(new Dimension(160, 30));
 
 
         lblEmpty.setPreferredSize(new Dimension(185,30));
