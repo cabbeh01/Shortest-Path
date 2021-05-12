@@ -21,8 +21,10 @@ public class ControlArea extends JPanel {
     JLabel lblEmpty = new JLabel("");
 
 
+
     public ControlArea(JFrame jp){
         this.setBackground(Color.DARK_GRAY);
+
 
         this.add(btnStartPoint,BorderLayout.NORTH);
         this.add(btnStartColor,BorderLayout.NORTH);
