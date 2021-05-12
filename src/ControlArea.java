@@ -106,10 +106,15 @@ public class ControlArea extends JPanel {
                         }
                     }
                     if(a==0){
-                        Area.end = newP;
-                        Area.resetNodes();
-                    }
-                    else{
+                        if (newP.x > 1000 || newP.x < 0 || newP.y > 1000 || newP.y < 0 ) { //Kolla ifall den är utanför
+                            JOptionPane.showConfirmDialog(jp, "Point is outside the map! Choose a new point","Error: Must be between 0-1000px", JOptionPane.PLAIN_MESSAGE);
+                            Area.end = temp;
+                        }
+                        else{
+                            Area.end = newP;
+                            Area.resetNodes();
+                        }
+                    } else{
                         Area.end = temp;
                     }
 
@@ -122,9 +127,8 @@ public class ControlArea extends JPanel {
         });
 
         btnStartColor.addActionListener(e -> {
-            startP = JColorChooser.showDialog(
-                    new JColorChooser(),
-                    "Choose Background Color",Color.BLACK);
+            Color temp = startP;
+            startP = JColorChooser.showDialog(new JColorChooser(), "Choose start point colour",startP);
 
             btnStartColor.setBackground(startP);
             jp.repaint();

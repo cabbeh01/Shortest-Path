@@ -45,7 +45,7 @@ public class Point implements Comparable<Point>{
         return y;
     }
 
-    public static class Branch {
+    public class Branch {
         Branch(double weight, Point node){
             this.weight = weight + node.extraweight;
             this.node = node;

@@ -13,7 +13,7 @@ public class Area extends JPanel {
     public Area(){
         try {
             new StringCutter("area1.txt");
-            new StringCutter("forbidden.txt");
+            //new StringCutter("forbidden.txt");
 
             generateUsablePoints();
             generateUsableEdges();
@@ -28,6 +28,7 @@ public class Area extends JPanel {
         Graph.a.clear();
         generateUsablePoints();
         generateUsableEdges();
+
     }
 
     //Denna metod gör att vi hittar hörnpunkterna på byggnaderna utifrån de
@@ -130,8 +131,11 @@ public class Area extends JPanel {
         //Potential
         if(potential){
             try {
-                Potential pe = new Potential(MapCreator.dim.height/2+100,MapCreator.dim.height/2+125,1,2,2, this);
-                pe.render(g);
+                //Potential pe = new Potential(MapCreator.dim.height/2+100,MapCreator.dim.height/2+125,100,5,5, this);
+                Potential p = new Potential();
+                resetNodes();
+                this.repaint();
+                p.render(g);
             } catch (Exception e) {
                 e.printStackTrace();
             }
