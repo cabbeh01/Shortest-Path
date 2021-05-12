@@ -23,12 +23,25 @@ public class Area extends JPanel {
         }
     }
 
-    public static void resetNodes(){
+    public void resetNodes(){
+        Graph.polygons.clear();
         Graph.points.clear();
         Graph.a.clear();
+
+        try {
+            new StringCutter("area2.txt");
+            if (blockedareas)
+                new StringCutter("forbidden.txt");
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         generateUsablePoints();
         generateUsableEdges();
 
+        newP = Graph.aStar(Graph.points.get(0),Graph.points.get(1));
+        this.repaint();
     }
 
     //Denna metod gör att vi hittar hörnpunkterna på byggnaderna utifrån de
@@ -133,8 +146,8 @@ public class Area extends JPanel {
             try {
                 //Potential pe = new Potential(MapCreator.dim.height/2+100,MapCreator.dim.height/2+125,100,5,5, this);
                 Potential p = new Potential();
-                resetNodes();
-                this.repaint();
+                //resetNodes();
+                //this.repaint();
                 p.render(g);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -144,6 +157,7 @@ public class Area extends JPanel {
 
         Point newP = Graph.aStar(Graph.points.get(0),Graph.points.get(1));
         Graph.printPath(start,newP,g2d);
+        //this.repaint();
 
         //Start and endpoint
         g2d.setColor(ControlArea.startP);

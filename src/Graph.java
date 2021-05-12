@@ -82,6 +82,6 @@ class Graph {
             g.drawLine((int)prev.y,(int)prev.x,(int)ide.y,(int)ide.x);
             prev = ide;//Sparar förra punkten
         }
-        System.out.println("");
+        //System.out.println("");
     }
 }

@@ -11,6 +11,7 @@ public class MapCreator {
     //public static ArrayList<Polygon> polys = new ArrayList<>();
     public static Dimension dim = new Dimension(1000, 800);
 
+    public static Area s = new Area();
     public static void main(String[] args) throws IOException {
 
         JFrame map = new JFrame("Map");
@@ -20,7 +21,7 @@ public class MapCreator {
         map.pack();
         map.setVisible(true);
 
-        JPanel area = new Area();
+        JPanel area = s;
         JPanel control = new ControlArea(map);
 
         area.setPreferredSize(new Dimension(map.getWidth(),map.getHeight()));

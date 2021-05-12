@@ -18,6 +18,7 @@ public class ControlArea extends JPanel {
     JButton btnStartColor = new JButton("");
     JButton btnEndColor = new JButton("");
 
+
     JLabel lblEmpty = new JLabel("");
 
 
@@ -75,13 +76,14 @@ public class ControlArea extends JPanel {
                     else{
                         Area.start = temp;
                     }
-                    jp.repaint();
+                    //jp.repaint();
                 }
                 catch (Exception s){
                     JOptionPane.showConfirmDialog(jp, s.getMessage(),"Error: isn't a valid point", JOptionPane.PLAIN_MESSAGE);
                 }
             }
         });
+
 
         btnEndPoint.addActionListener(e -> {
             String result = (String)JOptionPane.showInputDialog(
@@ -112,13 +114,13 @@ public class ControlArea extends JPanel {
                         }
                         else{
                             Area.end = newP;
-                            Area.resetNodes();
+                            MapCreator.s.resetNodes();
                         }
                     } else{
                         Area.end = temp;
                     }
 
-                    jp.repaint();
+                    //jp.repaint();
                 }
                 catch (Exception s){
                     JOptionPane.showConfirmDialog(jp, s.getMessage(),"Error: isn't a valid point", JOptionPane.PLAIN_MESSAGE);
@@ -140,7 +142,6 @@ public class ControlArea extends JPanel {
                     "Choose Background Color",Color.BLACK);
 
             btnEndColor.setBackground(endP);
-
             jp.repaint();
         });
 
@@ -151,7 +152,6 @@ public class ControlArea extends JPanel {
                     "Choose Background Color",Color.BLACK);
 
             btnShortestRoadColor.setBackground(shortestRoad);
-
             jp.repaint();
         });
 
@@ -179,7 +179,6 @@ public class ControlArea extends JPanel {
 
 
         lblEmpty.setPreferredSize(new Dimension(185,30));
-
     }
 
     private static void buttonLayout(JButton ... a) {

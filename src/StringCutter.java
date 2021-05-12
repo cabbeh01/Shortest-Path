@@ -63,10 +63,6 @@ public class StringCutter {
                 idEdge++;
             }
 
-            //vi behöver skapa 4 edges för varje polygon, denna loopen ^ skapar en
-            //Vi behöver skapa en array med polygoner som vi kan spara de i
-
-
             //MapCreator.polys.add(polygon);
             //Graph.a.addAll(Arrays.asList(polygon.edges));
             if(boundTitle.contains("Forbidden")){
