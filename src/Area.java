@@ -1,9 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
-public class Area extends JPanel {
+public class Area extends JPanel{
 
     //Points for the start and end-point
     static Point start = new Point(50,50);
@@ -11,18 +17,22 @@ public class Area extends JPanel {
     static boolean potential = false;
     static boolean blockedareas = false;
 
+
     static Point newP;
+
     public Area(){
         resetNodes();
     }
 
+
     public void resetNodes(){ //Vad vi kallar på för att rita om hela grafen när vi ändrar något
+
         Graph.polygons.clear();
         Graph.points.clear();
         Graph.edges.clear();
 
         try {
-            new StringCutter("area4.txt");
+            new StringCutter("area2.txt");
             if (blockedareas)
                 new StringCutter("forbidden.txt");
         }
@@ -37,21 +47,18 @@ public class Area extends JPanel {
         this.repaint();
     }
 
-    //Denna metod gör att vi hittar hörnpunkterna på byggnaderna utifrån de
-    //koordinater som vi har
     public static void generateUsablePoints(){
         Graph.points.add(start);
         Graph.points.add(end);
         for(Polygon pol : Graph.polygons){
-           if(!pol.getClass().getName().equals("Forbidden")){
-               Graph.points.addAll(Arrays.asList(pol.getCorners()));
+            if(!pol.getClass().getName().equals("Forbidden")){
+                Graph.points.addAll(Arrays.asList(pol.getCorners()));
             }
         }
 
         for(Polygon poly : Graph.polygons){
             Graph.points.removeIf(p -> Polygon.isInPoly(poly, p));
         }
-
     }
 
     //Här generar vi kanterna och listan som sedan skapas i backend med addBranch,
@@ -70,8 +77,8 @@ public class Area extends JPanel {
             }
         }
 
-        ControlArea.lblPoints.setText("Punkter: " + Graph.points.size());
-        ControlArea.lblPolygons.setText("Polygoner: " + Graph.polygons.size());
+        ControlArea.lblPoints.setText("Points: " + Graph.points.size());
+        ControlArea.lblPolygons.setText("Polygons: " + Graph.polygons.size());
 
         //Tar väck de kanterna som är inuti byggnader eller liknande
         Graph.polygons.forEach(p -> Graph.edges.removeIf(e -> Polygon.edgeCrossesPoly(p,e)));
