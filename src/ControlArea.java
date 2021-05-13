@@ -20,14 +20,18 @@ public class ControlArea extends JPanel {
     JButton btnEndColor = new JButton("");
 
 
+
     JLabel lblEmpty = new JLabel("");
+    JLabel lblEmpty1 = new JLabel("");
+    JLabel lblEmpty2 = new JLabel("");
 
 
 
     public ControlArea(JFrame jp){
-        this.setBackground(Color.DARK_GRAY);
+        this.setBackground(Color.DARK_GRAY.darker());
 
-
+        this.add(lblEmpty1,BorderLayout.NORTH);
+        this.add(text,BorderLayout.NORTH);
         this.add(btnStartPoint,BorderLayout.NORTH);
         this.add(btnStartColor,BorderLayout.NORTH);
 
@@ -40,8 +44,17 @@ public class ControlArea extends JPanel {
         this.add(btnShortestRoadColor,BorderLayout.NORTH);
         this.add(btnPotential,BorderLayout.NORTH);
         this.add(btnForbidden,BorderLayout.NORTH);
+        this.add(lblEmpty2,BorderLayout.NORTH);
+
+        this.add(lblPolygons);
+        this.add(lblPoints);
+        this.add(lblEdges);
         setPrefSizes();
         setColorToButton();
+
+        Image img = new ImageIcon("res/ShortestPath.png").getImage();
+        Image newimg = img.getScaledInstance(200, 80,  Image.SCALE_DEFAULT);
+        text.setIcon( new ImageIcon(newimg));
 
         lblEmpty.setFont(new Font("Arial Black", Font.PLAIN, 24));
         lblEmpty.setHorizontalAlignment(SwingConstants.CENTER);
@@ -213,12 +226,22 @@ public class ControlArea extends JPanel {
 
 
         lblEmpty.setPreferredSize(new Dimension(185,30));
+        lblEmpty1.setPreferredSize(new Dimension(185,30));
+        lblEmpty2.setPreferredSize(new Dimension(185,200));
     }
 
     private static void buttonLayout(JButton ... a) {
         for(JButton button : a){
             button.setFocusable(false);
             button.setUI(new BasicButtonUI());
+        }
+    }
+
+    private static void labelLayout(JLabel ... a) {
+        for(JLabel label : a){
+            label.setForeground(Color.WHITE);
+            label.setFont(new Font("Arial Black", Font.PLAIN, 20));
+            //label.setHorizontalAlignment(SwingConstants.LEFT);
         }
     }
 
@@ -233,6 +256,13 @@ public class ControlArea extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+
+        g.setColor(shortestRoad);
+        g.fillPolygon(new int[]{135, 215, 210, 128}, new int[]{110,71,58, 99}, 4);
+        g.setColor(startP);
+        g.fillOval(120, 93, 22, 22);
+        g.setColor(endP);
+        g.fillOval(199, 53, 22, 22);
     }
 }
 

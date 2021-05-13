@@ -23,18 +23,22 @@ public class MapCreator {
         JPanel area = s;
         JPanel control = new ControlArea(map);
 
+
         area.setPreferredSize(new Dimension(map.getWidth(),map.getHeight()));
         map.add(area);
         control.setPreferredSize(new Dimension(250,200));
-        map.add(control,BorderLayout.EAST);
+        map.add(control,BorderLayout.WEST);
 
         map.setTitle("Shortest Path");
         map.setResizable(false);
         map.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         map.setVisible(true);
 
-        //Icon to the program
+        //Logga till programmet
         map.setIconImage(ImageIO.read(new File("res/icon.png")));
         //System.out.println(map);
+
     }
+
+
 }

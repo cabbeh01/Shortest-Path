@@ -70,17 +70,13 @@ public class Area extends JPanel {
             }
         }
 
-        System.out.println("Antalet punkter: " + Graph.points.size());
-        System.out.println("Antalet Polygoner: " + Graph.polygons.size());
+        ControlArea.lblPoints.setText("Punkter: " + Graph.points.size());
+        ControlArea.lblPolygons.setText("Polygoner: " + Graph.polygons.size());
 
         //Tar väck de kanterna som är inuti byggnader eller liknande
         Graph.polygons.forEach(p -> Graph.edges.removeIf(e -> Polygon.edgeCrossesPoly(p,e)));
 
-        /*for(Polygon poly : Graph.polygons){ //Ta bort grannarna för e
-            Graph.a.removeIf(e -> Polygon.edgeCrossesPoly(poly, e));
-        }*/
-
-        System.out.println("Antalet edges: " + Graph.edges.size());
+        ControlArea.lblEdges.setText("Edges: " + Graph.edges.size());
     }
 
 
@@ -99,11 +95,13 @@ public class Area extends JPanel {
         g2d.scale(0.72,0.72);
         g2d.rotate(-(Math.PI/2),520,520);
 
-
+        //g2d.drawRect(StringCutter.boundary[0],StringCutter.boundary[1],1000,1000);
+        g2d.setColor(Color.darkGray);
+        g2d.fillRect(StringCutter.boundary[0],StringCutter.boundary[1],1000,1000);
+        Color myColour = new Color(255, 0, 0, 127);
         for(Polygon a : Graph.polygons){ //Vi loopar genom byggnader och blockerade områden
 
             if(a.getClass().getName().equals("Forbidden")){
-                Color myColour = new Color(255, 0, 0, 127);
                 g2d.setColor(myColour);
                 g2d.fillPolygon(a.yarray,a.xarray,8);
                 g2d.setColor(Color.RED);
@@ -124,7 +122,7 @@ public class Area extends JPanel {
             g2d.drawLine((int)e1.start.getY(),(int)e1.start.getX(),(int)e1.end.getY(),(int)e1.end.getX());
         }*/
 
-        g2d.setColor(Color.BLUE);
+        g2d.setColor(Color.lightGray);
         for(int i = 0; i<Graph.edges.size(); i++){ //Rita kanterna grafiskt
             g2d.drawLine((int)Graph.edges.get(i).start.getY(),(int)Graph.edges.get(i).start.getX(),(int)Graph.edges.get(i).end.getY(),(int)Graph.edges.get(i).end.getX());
         }

@@ -7,6 +7,7 @@ public class StringCutter {
     File nFile;
     Scanner inp;
 
+    public static int[] boundary = new int[4];
     public StringCutter(String file) throws FileNotFoundException {
         nFile = new File(System.getProperty("user.dir")+"\\"+"maps"+"\\"+file);
         inp = new Scanner(nFile);
@@ -14,19 +15,13 @@ public class StringCutter {
         String bound = inp.nextLine();
         String boundTitle = bound;
 
-        //Gettinge the bound
-        /*
-        bound = bound.replaceAll("[()]","").replaceAll("[A-Za-z:]","");
-        String [] boundArr = bound.split("[, ]");
-
-        for(String a: boundArr){
-            System.out.println(a);
+        if(!boundTitle.contains("Forbidden")){ //Vi gör detta endast för kartan för där finns border
+            bound = bound.replaceAll("[()]","").replaceAll("[A-Za-z:]","");
+            String [] boundArr = bound.split("[, ]");
+            for(int i= 1; i<=4;i++){
+                boundary[i-1] = (int)Double.parseDouble(boundArr[i]);
+            }
         }
-
-        System.out.println(bound);
-        for(int i= 1; i<=4;i++){
-            boundary[i-1] = (int)Double.parseDouble(boundArr[i]);
-        }*/
 
         int idEdge = 0;
         while(inp.hasNext()){
