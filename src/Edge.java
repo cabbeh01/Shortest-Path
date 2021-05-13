@@ -4,17 +4,11 @@ public class Edge implements Comparable<Point>{
     double length;
     int id;
 
-
     public Edge(Point start, Point end,double length,int id){
         this.start = start;
         this.end = end;
         this.length = length;
         this.id = id;
-
-    }
-
-    public double getLength() {
-        return length;
     }
 
     @Override

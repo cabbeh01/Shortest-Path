@@ -14,7 +14,6 @@ public class Point implements Comparable<Point>{
 
     ArrayList<Branch> neighboursEd;
 
-
     public Point(double x, double y){
         this.x = x;
         this.y = y;
@@ -45,8 +44,8 @@ public class Point implements Comparable<Point>{
     }
 
     public class Branch {
-        Branch(double weight, Point node){
-            this.weight = weight + Potential.getvalue(Point.this,node);
+        Branch(double weight, Point node){ //För att skapa en ny branch så skapar vi en branch och en punkt den kopplar till
+            this.weight = weight + Potential.getvalue(Point.this,node); //Här adderar vi potential värdet till vikten
             this.node = node;
         }
 
