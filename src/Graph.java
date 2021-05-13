@@ -9,7 +9,7 @@ class Graph {
     static ArrayList<Polygon> polygons = new ArrayList<>();
     static ArrayList<Point> points = new ArrayList<>();
 
-    public static Point aStar(Point start, Point target){
+    public static Point aStar(Point start, Point target){ //Börjar med att skicka in var vi är och var vi vill gå
         PriorityQueue<Point> closedList = new PriorityQueue<>();
         PriorityQueue<Point> openList = new PriorityQueue<>();
 
@@ -24,9 +24,9 @@ class Graph {
                 return n;
             }
 
-            for(Point.Branch edge : n.neighboursEd){
+            for(Point.Branch edge : n.neighboursEd){ //Skapar en ny kant i backend som skapar förhållande mellan noderna
                 Point m = edge.node;
-                double totalWeight = n.g + edge.weight;
+                double totalWeight = n.g + edge.weight; //totala vikten för den nya kanten
 
                 if(!openList.contains(m) && !closedList.contains(m)){
                     m.parent = n;
@@ -72,15 +72,13 @@ class Graph {
         Collections.reverse(ids);
         Collections.reverse(id);
 
-
         Point prev = start;//Start punkten
-        for(Point ide : ids){
-            //System.out.print("("+ide.x + "," +ide.y+" "+","+ide.h+")" +"id: " +ide.id + " ");
+        for(Point ide : ids){ //Går igenom en punkt itaget
 
             g.setColor(ControlArea.shortestRoad);
             g.setStroke(new BasicStroke(10));
             g.drawLine((int)prev.y,(int)prev.x,(int)ide.y,(int)ide.x);
-            prev = ide;//Sparar förra punkten
+            prev = ide;//Sparar förra punkten för att kunna rita om
         }
         //System.out.println("");
     }

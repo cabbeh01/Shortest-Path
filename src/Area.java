@@ -16,13 +16,13 @@ public class Area extends JPanel {
         resetNodes();
     }
 
-    public void resetNodes(){
+    public void resetNodes(){ //Vad vi kallar på för att rita om hela grafen när vi ändrar något
         Graph.polygons.clear();
         Graph.points.clear();
         Graph.edges.clear();
 
         try {
-            new StringCutter("area4.txt");
+            new StringCutter("area2.txt");
             if (blockedareas)
                 new StringCutter("forbidden.txt");
         }
@@ -54,6 +54,7 @@ public class Area extends JPanel {
 
     }
 
+    //Här generar vi kanterna och listan som sedan skapas i backend med addBranch,
     public static void generateUsableEdges(){
         for(int i = 0; i< Graph.points.size(); i++){
             for(int j = i+1; j< Graph.points.size(); j++){
@@ -72,6 +73,7 @@ public class Area extends JPanel {
         System.out.println("Antalet punkter: " + Graph.points.size());
         System.out.println("Antalet Polygoner: " + Graph.polygons.size());
 
+        //Tar väck de kanterna som är inuti byggnader eller liknande
         Graph.polygons.forEach(p -> Graph.edges.removeIf(e -> Polygon.edgeCrossesPoly(p,e)));
 
         /*for(Polygon poly : Graph.polygons){ //Ta bort grannarna för e
@@ -91,14 +93,14 @@ public class Area extends JPanel {
 
         this.setBackground(Color.WHITE);
 
-        //Enabling antialias to get a smoother experience
+        //Antialias för att få en mindre pixlig bild
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.scale(0.72,0.72);
         g2d.rotate(-(Math.PI/2),520,520);
 
 
-        for(Polygon a : Graph.polygons){ //We loop over all the polygons, including our forbidden areas
+        for(Polygon a : Graph.polygons){ //Vi loopar genom byggnader och blockerade områden
 
             if(a.getClass().getName().equals("Forbidden")){
                 Color myColour = new Color(255, 0, 0, 127);
@@ -117,21 +119,19 @@ public class Area extends JPanel {
 
         }
 
-
-
         //g2d.setColor(Color.BLUE);
        /* for(Edge e1 : Graph.a){
             g2d.drawLine((int)e1.start.getY(),(int)e1.start.getX(),(int)e1.end.getY(),(int)e1.end.getX());
         }*/
 
         g2d.setColor(Color.BLUE);
-        for(int i = 0; i<Graph.edges.size(); i++){ //DEBUGA KANTER
+        for(int i = 0; i<Graph.edges.size(); i++){ //Rita kanterna grafiskt
             g2d.drawLine((int)Graph.edges.get(i).start.getY(),(int)Graph.edges.get(i).start.getX(),(int)Graph.edges.get(i).end.getY(),(int)Graph.edges.get(i).end.getX());
         }
 
         g2d.setColor(Color.BLACK);
 
-        //Potential
+        //Skapar våran potential uträkning ifall vi trycker på knappen
         if(potential){
             try {
 
