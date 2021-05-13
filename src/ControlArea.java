@@ -4,11 +4,13 @@ import java.awt.*;
 
 public class ControlArea extends JPanel {
 
-    public static Color startP = Color.RED;
-    public static Color endP = Color.GREEN;
-    public static Color road = Color.BLUE;
-    public static Color shortestRoad = Color.RED;
+    public static Color startP = Color.white;
+    public static Color endP = Color.cyan.darker();
+    public static Color shortestRoad = Color.cyan;
 
+    public static JLabel lblPoints = new JLabel("Points: ");
+    public static JLabel lblPolygons = new JLabel("Polygons: ");
+    public static JLabel lblEdges = new JLabel("Edges: ");
 
     JButton btnStartPoint = new JButton("Startpunkt");
     JButton btnEndPoint = new JButton("Slutpunkt");
@@ -18,6 +20,8 @@ public class ControlArea extends JPanel {
     JButton btnForbidden = new JButton("Forbidden: AV");
     JButton btnStartColor = new JButton("");
     JButton btnEndColor = new JButton("");
+    JLabel text = new JLabel();
+
 
 
 
@@ -59,8 +63,9 @@ public class ControlArea extends JPanel {
         lblEmpty.setFont(new Font("Arial Black", Font.PLAIN, 24));
         lblEmpty.setHorizontalAlignment(SwingConstants.CENTER);
         buttonLayout(btnEndPoint,btnStartPoint,btnPotential,btnForbidden,btnStartColor,btnEndColor
-        ,btnShortestRoad,btnShortestRoadColor);
+        ,btnShortestRoad,btnShortestRoadColor); //Ändrar temat på knapparna
 
+        labelLayout(lblEdges,lblPoints,lblPolygons);
         btnStartPoint.addActionListener(e -> {
             String result = (String)JOptionPane.showInputDialog(
                     jp,
@@ -178,12 +183,10 @@ public class ControlArea extends JPanel {
 
         btnPotential.addActionListener(e -> {
             Area.potential = !Area.potential;
-            if(Area.potential){
+            if(Area.potential)
                 btnPotential.setText("Potential: PÅ");
-            }
-            else{
+            else
                 btnPotential.setText("Potential: AV");
-            }
 
             Area.start = new Point(Area.start.x,Area.start.y);
             Area.end = new Point(Area.end.x,Area.end.y);;
@@ -195,17 +198,14 @@ public class ControlArea extends JPanel {
 
             Area.blockedareas = !Area.blockedareas;
 
-            if(Area.blockedareas){
+            if(Area.blockedareas)
                 btnForbidden.setText("Forbidden: PÅ");
-            }
-            else{
+            else
                 btnForbidden.setText("Forbidden: AV");
-
-            }
 
             Point tempStart = Area.start;
             Point tempEnd = Area.end;
-
+            //Eftersom blockedareas tar väck visa vägar så måste vi trigga printpath igen
             Area.start = new Point(tempStart.x,tempStart.y);
             Area.end = new Point(tempEnd.x,tempEnd.y);;
 
@@ -223,13 +223,12 @@ public class ControlArea extends JPanel {
         btnShortestRoad.setPreferredSize(new Dimension(160, 30));
         btnPotential.setPreferredSize(new Dimension(160, 30));
         btnForbidden.setPreferredSize(new Dimension(160, 30));
-
-
         lblEmpty.setPreferredSize(new Dimension(185,30));
         lblEmpty1.setPreferredSize(new Dimension(185,30));
         lblEmpty2.setPreferredSize(new Dimension(185,200));
     }
 
+    //Smidig funktion för att skapa våran layout för knapparna
     private static void buttonLayout(JButton ... a) {
         for(JButton button : a){
             button.setFocusable(false);

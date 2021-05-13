@@ -47,7 +47,7 @@ public class StringCutter {
                 yPoints[i+1] = (int)Double.parseDouble(dat[3]);
                 length = (int)Double.parseDouble(dat[4]);
 
-                //Vi använder din loop och går igenom en kant i taget efter loopen bygger vi polygonen innan vi går till nästa polygon
+                //Vi använder loopen för att skapa punkterna, sedan kanterna och efter loopen skapar vi polygonen
                 Point startpoint = new Point(Double.parseDouble(dat[0]),Double.parseDouble(dat[1]));
                 Point endpoint = new Point(Double.parseDouble(dat[2]),Double.parseDouble(dat[3]));
 
@@ -57,8 +57,7 @@ public class StringCutter {
                 idEdge++;
             }
 
-            //MapCreator.polys.add(polygon);
-            //Graph.a.addAll(Arrays.asList(polygon.edges));
+            //Här skapar vi polygonen från edges listan och punkterna
             if(boundTitle.contains("Forbidden")){
                 Forbidden polygon = new Forbidden(edges,xPoints,yPoints,8,id);
                 Graph.polygons.add(polygon);
@@ -67,8 +66,6 @@ public class StringCutter {
                 Polygon polygon = new Polygon(edges,xPoints,yPoints,8,id);
                 Graph.polygons.add(polygon);
             }
-
         }
-
     }
 }

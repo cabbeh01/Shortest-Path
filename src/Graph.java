@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-//DFS Technique for undirected graph
+//Algoritm för att söka vägen och print funktionen
 class Graph {
 
     static ArrayList<Edge> edges = new ArrayList<>();

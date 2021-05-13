@@ -17,10 +17,12 @@ public class Potential {
         if(!Area.potential)
             return 0;
 
+        //Tar två punkter och tar ut increment för x och y
         double fullpotential = 0;
         double hippityx = (pointS.x - pointE.x)/50;
         double hiippityy =(pointS.y - pointE.y)/50;
 
+        //Skapar 50 punker med hjälp av increment värderna
         for (int i = 0; i < 50; i++) {
             fullpotential =+ potentialAt(new Point(pointS.x+hippityx*i,pointS.y+hiippityy*i));
         }
@@ -30,6 +32,7 @@ public class Potential {
 
     public void render(Graphics g){ //Skapar cirklarna
 
+        //Cirklarna är inte en korrekt illustration av algoritmet, endast för att vi ska ungefär se dens påverkan
         Color myColour = new Color(255, 100, 20, 67);
         g.setColor(myColour);
 

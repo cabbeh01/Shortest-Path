@@ -12,7 +12,7 @@ public class MapCreator {
     public static Dimension dim = new Dimension(1000, 800);
 
     public static Area s = new Area();
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException { //Vi skapar vårat fönster och lägger till vårat grafiska användar gränsnitt
 
         JFrame map = new JFrame("Map");
         map.setPreferredSize(dim);

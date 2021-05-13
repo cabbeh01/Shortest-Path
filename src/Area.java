@@ -22,7 +22,7 @@ public class Area extends JPanel {
         Graph.edges.clear();
 
         try {
-            new StringCutter("area2.txt");
+            new StringCutter("area4.txt");
             if (blockedareas)
                 new StringCutter("forbidden.txt");
         }
@@ -87,12 +87,13 @@ public class Area extends JPanel {
 
         Graphics2D g2d = (Graphics2D)g;
 
-        this.setBackground(Color.WHITE);
+        this.setBackground(Color.DARK_GRAY.darker());
 
         //Antialias för att få en mindre pixlig bild
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.scale(0.72,0.72);
+        g2d.translate(10,-5);
         g2d.rotate(-(Math.PI/2),520,520);
 
         //g2d.drawRect(StringCutter.boundary[0],StringCutter.boundary[1],1000,1000);
@@ -106,7 +107,7 @@ public class Area extends JPanel {
                 g2d.fillPolygon(a.yarray,a.xarray,8);
                 g2d.setColor(Color.RED);
                 g2d.setStroke(new BasicStroke(5));
-                g2d.drawRect(a.yarray[0],a.xarray[0],(int)a.getRight().length,(int) a.getBottom().length);
+                g2d.drawRect(a.yarray[0],a.xarray[0],(int)a.getLeft().length,(int) a.getBottom().length);
                 g2d.setStroke(new BasicStroke(1));
 
             }
