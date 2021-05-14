@@ -1,6 +1,5 @@
 public class Edge implements Comparable<Point>{
-    Point start;
-    Point end;
+    Point start, end;
     double length;
     int id;
 
@@ -20,7 +19,6 @@ public class Edge implements Comparable<Point>{
         double dx2 = (point.getX() - start.getX()); //x3 -x1;
         double dy2 = (point.getY() - start.getY()); //y3 -y1;
 
-
         double compare = (dx1*dy2 - dy1*dx2);
         if(compare>0){  //Större än noll så är punkten inuti, vänster sida om edgen
             return 1;
@@ -31,4 +29,3 @@ public class Edge implements Comparable<Point>{
         return 0;
     }
 }
-

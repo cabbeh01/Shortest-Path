@@ -11,17 +11,17 @@ public class Point implements Comparable<Point>{
 
     public Point parent = null;
 
-    ArrayList<Branch> neighboursEd;
+    ArrayList<Branch> neighboursEd; //Backend listan av länkar mellan noder
 
     public Point(double x, double y){
         this.x = x;
         this.y = y;
         this.id = idCounter++;
-        this.h = Math.sqrt(Math.pow(this.x-950,2)+Math.pow(this.y-950,2));
+        this.h = 0;
         this.neighboursEd=new ArrayList<>();
     }
 
-    public void addBranch(double weight, Point p){
+    public void addBranch(double weight, Point p){ //Lägger till den nyskapade branchen i backend listan
         Branch ed = new Branch(weight,p);
         neighboursEd.add(ed);
     }

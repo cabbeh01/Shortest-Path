@@ -123,13 +123,11 @@ public class Area extends JPanel{
                 g2d.setStroke(new BasicStroke(5));
                 g2d.drawRect(a.yarray[0],a.xarray[0],(int)a.getLeft().length,(int) a.getBottom().length);
                 g2d.setStroke(new BasicStroke(1));
-
             }
             else{
                 g2d.setColor(Color.BLACK);
                 g2d.fillPolygon(a.yarray,a.xarray,8);
             }
-
         }
 
         g2d.setColor(Color.lightGray);

@@ -26,15 +26,12 @@ public class ControlArea extends JPanel { //Vänstra panelen på fönstret
     JButton btnoutFill1= new JButton("");
     JLabel text = new JLabel();
 
-
-
-
     JLabel lblEmpty = new JLabel("");
     JLabel lblEmpty1 = new JLabel("");
     JLabel lblEmpty2 = new JLabel("");
 
 
-
+    //Här skapar vi den största delen av det grafiska gränsnittet, som t.ex. knappar eller labels.
     public ControlArea(JFrame jp){
         this.setBackground(Color.DARK_GRAY.darker());
 
@@ -55,8 +52,6 @@ public class ControlArea extends JPanel { //Vänstra panelen på fönstret
         this.add(btnForbidden,BorderLayout.NORTH);
 
         this.add(lblEmpty2,BorderLayout.NORTH);
-
-
 
 
         this.add(lblPolygons);
@@ -106,7 +101,7 @@ public class ControlArea extends JPanel { //Vänstra panelen på fönstret
                         }
                     }
                     if(a==0){
-                        if (newP.x > 1000 || newP.x < 0 || newP.y > 1000 || newP.y < 0 ) { //Kolla ifall den är utanför
+                        if (newP.x > 1000 || newP.x < 0 || newP.y > 1000 || newP.y < 0 ) { //Kolla ifall den är utanför boundry
                             JOptionPane.showConfirmDialog(jp, "Point is outside the map! Choose a new point","Error: Must be between 0-1000px", JOptionPane.PLAIN_MESSAGE);
                             Area.start = temp;
                         } else {
@@ -148,7 +143,7 @@ public class ControlArea extends JPanel { //Vänstra panelen på fönstret
                         }
                     }
                     if(a==0){
-                        if (newP.x > 1000 || newP.x < 0 || newP.y > 1000 || newP.y < 0 ) { //Kolla ifall den är utanför
+                        if (newP.x > 1000 || newP.x < 0 || newP.y > 1000 || newP.y < 0 ) { //Kolla ifall den är utanför boundry
                             JOptionPane.showConfirmDialog(jp, "Point is outside the map! Choose a new point","Error: Must be between 0-1000px", JOptionPane.PLAIN_MESSAGE);
                             Area.end = temp;
                         }
@@ -170,7 +165,7 @@ public class ControlArea extends JPanel { //Vänstra panelen på fönstret
             Color temp = startP;
             startP = JColorChooser.showDialog(new JColorChooser(), "Choose startpoint colour",startP);
 
-            if(startP == null)
+            if(startP == null) //Ifall man inte väljer något så behåller den färgen från innan
                 startP = temp;
             btnStartColor.setBackground(startP);
             jp.repaint();
@@ -180,7 +175,7 @@ public class ControlArea extends JPanel { //Vänstra panelen på fönstret
             Color temp = endP;
             endP = JColorChooser.showDialog(new JColorChooser(), "Choose endpoint colour",endP);
 
-            if (endP == null)
+            if (endP == null) //Ifall man inte väljer något så behåller den färgen från innan
                 endP = temp;
             btnEndColor.setBackground(endP);
             jp.repaint();
@@ -220,7 +215,7 @@ public class ControlArea extends JPanel { //Vänstra panelen på fönstret
 
             Point tempStart = Area.start;
             Point tempEnd = Area.end;
-            //Eftersom blockedareas tar väck visa vägar så måste vi trigga printpath igen
+            //Eftersom blockedareas tar väck visa vägar så måste vi trigga printpath igen för att rita om den
             Area.start = new Point(tempStart.x,tempStart.y);
             Area.end = new Point(tempEnd.x,tempEnd.y);;
 
@@ -288,4 +283,3 @@ public class ControlArea extends JPanel { //Vänstra panelen på fönstret
         g.fillOval(199, 53, 22, 22);
     }
 }
-
