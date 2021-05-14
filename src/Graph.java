@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-//Algoritm för att söka vägen och print funktionen
+//Algoritm för att söka kortaste vägen och print funktionen
 class Graph {
 
     static ArrayList<Edge> edges = new ArrayList<>();
@@ -13,8 +13,8 @@ class Graph {
         PriorityQueue<Point> closedList = new PriorityQueue<>();
         PriorityQueue<Point> openList = new PriorityQueue<>();
 
-        start.g = 0;
-        start.f = start.g + start.calculateHeuristicpoint(target);
+        start.g = 0; //Startkostnaden för den kortaste vägen från start till nuvarande nod
+        start.f = start.g + start.calcHeuristicPoint(target);   //Längden från start till slut som kan vara om det existerar
 
         openList.add(start);
 
@@ -26,18 +26,19 @@ class Graph {
 
             for(Point.Branch edge : n.neighboursEd){ //Skapar en ny kant i backend som skapar förhållande mellan noderna
                 Point m = edge.node;
-                double totalWeight = n.g + edge.weight; //totala vikten för den nya kanten
+                double totalWeight = n.g + edge.weight; //Totala vikten för den nya kanten
 
                 if(!openList.contains(m) && !closedList.contains(m)){
                     m.parent = n;
                     m.g = totalWeight;
-                    m.f = m.g + m.calculateHeuristicpoint(target);
+                    m.f = m.g + m.calcHeuristicPoint(target);
                     openList.add(m);
-                } else {
-                    if(totalWeight < m.g){
+                }
+                else {
+                    if(totalWeight < m.g){//Vägen till grannen är bättre än förgående
                         m.parent = n;
                         m.g = totalWeight;
-                        m.f = m.g + m.calculateHeuristicpoint(target);
+                        m.f = m.g + m.calcHeuristicPoint(target);
 
                         if(closedList.contains(m)){
                             closedList.remove(m);
@@ -46,40 +47,40 @@ class Graph {
                     }
                 }
             }
-
             openList.remove(n);
             closedList.add(n);
         }
-        return null;
+
+        return null; //Om ingen väg kan hittas
     }
 
-    public static void printPath(Point start, Point target, Graphics2D g){
+    //Våran metod för att rita vägen efter vi har har hittat den
+    public static void renderPath(Point start, Point target, Graphics2D g){
         Point n = target;
 
-        if(n==null)
+        if(n==null){
             return;
+        }
 
-        List<Point> ids = new ArrayList<>();
-        List<Integer> id = new ArrayList<>();
+        List<Point> points = new ArrayList<>();
 
         while(n.parent != null){
-            ids.add(n);
-            id.add(n.id);
+            points.add(n);
             n = n.parent;
         }
-        ids.add(n);
-        id.add(n.id);
-        Collections.reverse(ids);
-        Collections.reverse(id);
 
-        Point prev = start;//Start punkten
-        for(Point ide : ids){ //Går igenom en punkt itaget
+        points.add(n);
+        Collections.reverse(points);
 
+        //Start punkten
+        Point prev = start;
+
+        //Går igenom en punkt itaget
+        for(Point p : points){
             g.setColor(ControlArea.shortestRoad);
             g.setStroke(new BasicStroke(10));
-            g.drawLine((int)prev.y,(int)prev.x,(int)ide.y,(int)ide.x);
-            prev = ide;//Sparar förra punkten för att kunna rita om
+            g.drawLine((int)prev.y,(int)prev.x,(int)p.y,(int)p.x);
+            prev = p; //Sparar förra punkten för att kunna rita om
         }
-        //System.out.println("");
     }
 }

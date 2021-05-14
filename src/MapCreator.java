@@ -3,15 +3,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MapCreator {
 
-    //public static ArrayList<Polygon> polys = new ArrayList<>();
+    //Storleken på fönstret
     public static Dimension dim = new Dimension(1000, 800);
 
+    //Skapar ett objekt av area
     public static Area s = new Area();
+
     public static void main(String[] args) throws IOException { //Vi skapar vårat fönster och lägger till vårat grafiska användar gränsnitt
 
         JFrame map = new JFrame("Map");
@@ -34,11 +34,7 @@ public class MapCreator {
         map.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         map.setVisible(true);
 
-        //Logga till programmet
+        //Ikon till programmet
         map.setIconImage(ImageIO.read(new File("res/icon.png")));
-        //System.out.println(map);
-
     }
-
-
 }

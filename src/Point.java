@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 
 public class Point implements Comparable<Point>{
-    double x;
-    double y;
+    double x,y;
     int id;
     private static int idCounter = 0;
 
@@ -31,7 +30,7 @@ public class Point implements Comparable<Point>{
         neighboursEd.removeIf(es -> es.node == p);
     }
 
-    public double calculateHeuristicpoint(Point point){
+    public double calcHeuristicPoint(Point point){
         return this.h;
     }
 
@@ -53,6 +52,7 @@ public class Point implements Comparable<Point>{
         public Point node;
     }
 
+    //Jämför f värdet mellan denna en annan punkt
     @Override
     public int compareTo(Point n) {
         return Double.compare(this.f, n.f);

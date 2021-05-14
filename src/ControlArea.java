@@ -2,12 +2,14 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
 
-public class ControlArea extends JPanel {
+public class ControlArea extends JPanel { //Vänstra panelen på fönstret
 
+    //Färgvariabler för punkter och kortastevägen
     public static Color startP = Color.white;
     public static Color endP = Color.cyan.darker();
     public static Color shortestRoad = Color.cyan;
 
+    //Text
     public static JLabel lblPoints = new JLabel("Points: ");
     public static JLabel lblPolygons = new JLabel("Polygons: ");
     public static JLabel lblEdges = new JLabel("Edges: ");
@@ -60,12 +62,14 @@ public class ControlArea extends JPanel {
         this.add(lblPolygons);
         this.add(lblPoints);
         this.add(lblEdges);
+
+
         setPrefSizes();
         setColorToButton();
 
         Image img = new ImageIcon("res/ShortestPath.png").getImage();
         Image newimg = img.getScaledInstance(200, 80,  Image.SCALE_DEFAULT);
-        text.setIcon( new ImageIcon(newimg));
+        text.setIcon(new ImageIcon(newimg));
 
         lblEmpty.setFont(new Font("Arial Black", Font.PLAIN, 24));
         lblShortest.setFont(new Font("Arial Black", Font.PLAIN, 16));
@@ -77,6 +81,7 @@ public class ControlArea extends JPanel {
         labelLayout(lblEdges,lblPoints,lblPolygons);
 
         buttonFillout(btnoutFill1,btnoutFill);
+
         btnStartPoint.addActionListener(e -> {
             String result = (String)JOptionPane.showInputDialog(
                     jp,
@@ -112,7 +117,6 @@ public class ControlArea extends JPanel {
                     else{
                         Area.start = temp;
                     }
-                    //jp.repaint();
                 }
                 catch (Exception s){
                     JOptionPane.showConfirmDialog(jp, s.getMessage(),"Error: isn't a valid point", JOptionPane.PLAIN_MESSAGE);
@@ -207,9 +211,9 @@ public class ControlArea extends JPanel {
 
         btnForbidden.addActionListener(e -> {
 
-            Area.blockedareas = !Area.blockedareas;
+            Area.blockedAreas = !Area.blockedAreas;
 
-            if(Area.blockedareas)
+            if(Area.blockedAreas)
                 btnForbidden.setText("Forbidden: PÅ");
             else
                 btnForbidden.setText("Forbidden: AV");
@@ -262,7 +266,6 @@ public class ControlArea extends JPanel {
         for(JLabel label : a){
             label.setForeground(Color.WHITE);
             label.setFont(new Font("Arial Black", Font.PLAIN, 20));
-            //label.setHorizontalAlignment(SwingConstants.LEFT);
         }
     }
 
@@ -273,11 +276,10 @@ public class ControlArea extends JPanel {
     }
 
 
-    //The paint component to draw the panel
+    //Ritar ut loggans punkt färger och linjens färg
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-
         g.setColor(shortestRoad);
         g.fillPolygon(new int[]{135, 215, 210, 128}, new int[]{110,71,58, 99}, 4);
         g.setColor(startP);

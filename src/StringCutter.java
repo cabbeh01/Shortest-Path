@@ -7,12 +7,15 @@ public class StringCutter {
     File nFile;
     Scanner inp;
 
+    //Lagrar boundarykoordinaterna
     public static int[] boundary = new int[4];
+
+    //Läser av en textfil och lägger in polygonerna/förbjudna områden i grafens lista
     public StringCutter(String file) throws FileNotFoundException {
         nFile = new File(System.getProperty("user.dir")+"\\"+"maps"+"\\"+file);
         inp = new Scanner(nFile);
 
-        String bound = inp.nextLine();
+        String bound = inp.nextLine();//Första raden i textfilen som är storleken på kartan
         String boundTitle = bound;
 
         if(!boundTitle.contains("Forbidden")){ //Vi gör detta endast för kartan för där finns border
@@ -36,7 +39,7 @@ public class StringCutter {
 
             Edge[] edges = new Edge[4];
 
-            while(i<4) {
+            while(i<4) {//Polygon med fyra kanter
 
                 //Filtrerar ner data till endast värden
                 String[] dat = inp.nextLine().replaceAll("[()]", "").replaceAll(". Length: ", ",").split(",");

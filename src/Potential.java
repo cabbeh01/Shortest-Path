@@ -8,12 +8,12 @@ public class Potential {
     static int sigX = 130;
     static int sigY = 130;
 
+    //Funktionsuttrycket för potentialen av guassefunktionen. Tar in punkt som är två varibler X och Y
     public static double potentialAt(Point p){
         return A*Math.exp(-((Math.pow(p.x-x,2)/(2*Math.pow(sigX,2)))+(Math.pow(p.y-y,2)/(2*Math.pow(sigY,2)))));
     }
 
     public static double getvalue(Point pointS, Point pointE) {
-
         if(!Area.potential)
             return 0;
 
