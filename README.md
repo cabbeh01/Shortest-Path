@@ -6,5 +6,5 @@ This project involved applying the shortest path searching algorithm a-star. Usi
 ## What we learned
 - Add contributors to a github project
 - Implement A* Algoritm
-- Fetching data from textfile
+- Fetch data from textfile
 
